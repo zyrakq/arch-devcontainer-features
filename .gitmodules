@@ -1,0 +1,3 @@
+[submodule "vendor/bartventer-features"]
+	path = vendor/bartventer-features
+	url = https://github.com/bartventer/arch-devcontainer-features.git

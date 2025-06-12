@@ -1,0 +1,16 @@
+{
+    "id": "yay",
+    "version": "1.0.0",
+    "name": "Yay AUR Helper",
+    "description": "Installs yay AUR helper for Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "options": {
+        "installPackages": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of AUR packages to install after yay setup (optional)"
+        }
+    }
+}

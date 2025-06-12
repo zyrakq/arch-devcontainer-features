@@ -1,0 +1,10 @@
+{
+    "test_with_packages": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {
+                "installPackages": "tree,htop"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "test_https_clone": {
+        "image": "archlinux:latest",
+        "features": {
+            "clone-repo": {
+                "repoUrl": "https://github.com/octocat/Hello-World.git",
+                "targetDir": "/workspace/test-repo"
+            }
+        }
+    },
+    "test_branch_clone": {
+        "image": "archlinux:latest",
+        "features": {
+            "clone-repo": {
+                "repoUrl": "https://github.com/microsoft/vscode.git",
+                "targetDir": "/workspace/vscode-repo",
+                "branch": "main"
+            }
+        }
+    },
+    "test_default_target": {
+        "image": "archlinux:latest",
+        "features": {
+            "clone-repo": {
+                "repoUrl": "https://github.com/devcontainers/features.git"
+            }
+        }
+    }
+}

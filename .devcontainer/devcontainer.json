@@ -1,0 +1,60 @@
+{
+    "name": "arch-devcontainer-features Workspace (Archlinux)",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".",
+        "args": {
+            "VARIANT": "latest"
+        }
+    },
+    "workspaceFolder": "/workspace/arch-devcontainer-features",
+    "workspaceMount": "source=arch-devcontainer-features-workspace,target=/workspace/arch-devcontainer-features,type=volume",
+    "mounts": [
+        "source=arch-devcontainer-features-home,target=/home/vscode,type=volume"
+    ],
+    "remoteUser": "vscode",
+    "runArgs": [
+        "--name", "arch-devcontainer-features-workspace",
+        "--network=arch-devcontainer-features-workspace-network"
+    
+    ],
+    "features": {
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils:1": {
+            "username": "vscode",
+            "additionalPackages": "base-devel",
+            // "additionalPackages": "base-devel nodejs npm",
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "configureZshAsDefaultShell": true
+        },
+        "ghcr.io/bartventer/arch-devcontainer-features/docker-in-docker": {},
+        "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
+            "installPackages": "act-bin"
+        },
+        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+            "repoUrl": "git@github.com:zeritiq/arch-devcontainer-features.git",
+            "targetDir": "/workspace/arch-devcontainer-features"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "json.schemas": [
+                    {
+                        "fileMatch": [
+                            "*/devcontainer-feature.json"
+                        ],
+                        "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+                    }
+                ]
+            },
+            "extensions": [
+                "mads-hartmann.bash-ide-vscode"
+            ]
+        }
+    },
+    "initializeCommand": [
+        "bash", "-c", "docker network ls | grep -q arch-devcontainer-features-workspace-network || docker network create arch-devcontainer-features-workspace-network"
+    ]
+    // "postCreateCommand": "npm install -g @devcontainers/cli"
+}

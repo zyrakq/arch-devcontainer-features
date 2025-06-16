@@ -22,12 +22,14 @@
         "ghcr.io/bartventer/arch-devcontainer-features/common-utils:1": {
             "username": "vscode",
             "additionalPackages": "base-devel",
-            // "additionalPackages": "base-devel nodejs npm",
             "installZsh": true,
             "installOhMyZsh": true,
             "configureZshAsDefaultShell": true
         },
         "ghcr.io/bartventer/arch-devcontainer-features/docker-in-docker": {},
+        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+            "globalPackages": "@devcontainers/cli"
+        },
         "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
             "installPackages": "act-bin"
         },
@@ -56,5 +58,4 @@
     "initializeCommand": [
         "bash", "-c", "docker network ls | grep -q arch-devcontainer-features-workspace-network || docker network create arch-devcontainer-features-workspace-network"
     ]
-    // "postCreateCommand": "npm install -g @devcontainers/cli"
 }

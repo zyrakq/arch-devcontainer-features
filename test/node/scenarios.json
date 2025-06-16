@@ -1,0 +1,44 @@
+{
+    "test": {
+        "image": "archlinux:latest",
+        "features": {
+            "node": {}
+        }
+    },
+    "test_with_packages": {
+        "image": "archlinux:latest",
+        "features": {
+            "node": {
+                "globalPackages": "typescript,nodemon"
+            }
+        }
+    },
+    "test_nvm_install": {
+        "image": "archlinux:latest",
+        "features": {
+            "node": {
+                "installMethod": "nvm",
+                "nodeVersion": "18.17.0",
+                "nvmVersion": "v0.39.1"
+            }
+        }
+    },
+    "test_yarn_pnpm": {
+        "image": "archlinux:latest",
+        "features": {
+            "node": {
+                "installYarn": true,
+                "installPnpm": true
+            }
+        }
+    },
+    "test_latest_version": {
+        "image": "archlinux:latest",
+        "features": {
+            "node": {
+                "nodeVersion": "latest",
+                "configureNpmPrefix": false
+            }
+        }
+    }
+}

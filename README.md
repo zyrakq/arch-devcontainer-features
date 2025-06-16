@@ -31,6 +31,20 @@ Automatically clones a Git repository into your devcontainer workspace during co
 }
 ```
 
+### 🟢 [Node.js and npm](src/node/README.md)
+Installs Node.js and npm with sudo-free configuration for Arch Linux DevContainers.
+
+```json
+{
+    "features": {
+        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+            "nodeVersion": "lts",
+            "globalPackages": "typescript,nodemon"
+        }
+    }
+}
+```
+
 ## 🏗️ Architecture
 
 ### Stable Dependency on bartventer/arch-devcontainer-features
@@ -41,7 +55,8 @@ This project uses a Git submodules architecture for stability:
 arch-devcontainer-features/
 ├── src/                     # Our features
 │   ├── yay/
-│   └── clone-repo/
+│   ├── clone-repo/
+│   └── node/
 └── vendor/                  # Dependencies
     └── bartventer-features/ # Git submodule v1.24.5
         └── scripts/
@@ -67,12 +82,16 @@ arch-devcontainer-features/
         "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
             "installPackages": "git,vim,curl"
         },
+        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+            "nodeVersion": "lts",
+            "globalPackages": "typescript,nodemon"
+        },
         "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "https://github.com/your-org/your-project.git",
             "targetDir": "/workspace"
         }
     },
-    "postCreateCommand": "yay -Sy --noconfirm && echo 'DevContainer ready!'"
+    "postCreateCommand": "node --version && npm --version && echo 'DevContainer ready!'"
 }
 ```
 
@@ -128,7 +147,11 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   └── README.md
-│   └── clone-repo/         # Clone repository feature
+│   ├── clone-repo/         # Clone repository feature
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   └── README.md
+│   └── node/               # Node.js and npm feature
 │       ├── devcontainer-feature.json
 │       ├── install.sh
 │       └── README.md
@@ -169,11 +192,13 @@ The project includes automated processes:
 Features are automatically published to:
 - `ghcr.io/zeritiq/arch-devcontainer-features/yay`
 - `ghcr.io/zeritiq/arch-devcontainer-features/clone-repo`
+- `ghcr.io/zeritiq/arch-devcontainer-features/node`
 
 ## 📖 Documentation
 
 - [Yay AUR Helper](src/yay/README.md) - Detailed yay feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
+- [Node.js and npm](src/node/README.md) - Node.js feature documentation
 - [DevContainers Specification](https://containers.dev/implementors/features/) - Official specification
 
 ## 🤝 Contributing

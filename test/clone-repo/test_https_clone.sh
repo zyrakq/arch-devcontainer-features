@@ -16,7 +16,7 @@ check "clone script exists" test -f /usr/local/bin/clone-repo-ssh
 # The actual repository URL and target directory are defined in scenarios.json
 check "target directory exists" test -d /workspace/test-repo
 check "cloned repo has .git directory" test -d /workspace/test-repo/.git
-check "cloned repo has files" test -f /workspace/test-repo/README.md
+check "cloned repo has files" test -f /workspace/test-repo/README
 
 # Test git operations in cloned repo
 cd /workspace/test-repo
@@ -25,7 +25,7 @@ check "can get git log" git log --oneline -n 1
 check "can get current branch" git branch --show-current
 
 # Test file permissions
-check "files are readable" test -r /workspace/test-repo/README.md
+check "files are readable" test -r /workspace/test-repo/README
 check "directory is writable" touch /workspace/test-repo/test-write && rm /workspace/test-repo/test-write
 
 # Report result

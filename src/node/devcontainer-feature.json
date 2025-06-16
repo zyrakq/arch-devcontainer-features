@@ -1,0 +1,47 @@
+{
+    "id": "node",
+    "version": "1.0.0",
+    "name": "Node.js, npm, Yarn, and pnpm",
+    "description": "Installs Node.js, npm, and optionally Yarn and pnpm, with sudo-free configuration for Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "options": {
+        "nodeVersion": {
+            "type": "string",
+            "default": "lts",
+            "description": "Node.js version to install (lts, latest, or specific version)"
+        },
+        "installMethod": {
+            "type": "string",
+            "enum": ["pacman", "nvm"],
+            "default": "pacman",
+            "description": "Installation method: pacman or nvm"
+        },
+        "nvmVersion": {
+            "type": "string",
+            "default": "latest",
+            "description": "nvm version to install (e.g., 'v0.39.1' or 'latest')"
+        },
+        "installYarn": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install Yarn package manager"
+        },
+        "installPnpm": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install pnpm package manager"
+        },
+        "globalPackages": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of npm packages to install globally"
+        },
+        "configureNpmPrefix": {
+            "type": "boolean",
+            "default": true,
+            "description": "Configure npm to install global packages without sudo"
+        }
+    }
+}

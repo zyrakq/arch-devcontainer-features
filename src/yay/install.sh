@@ -74,33 +74,6 @@ check_root
 check_system
 check_pacman
 
-# Determine the appropriate non-root user
-if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
-    USERNAME=""
-    POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-    for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-        if id -u "${CURRENT_USER}" >/dev/null 2>&1; then
-            USERNAME=${CURRENT_USER}
-            break
-        fi
-    done
-    if [ "${USERNAME}" = "" ]; then
-        USERNAME=root
-    fi
-elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" >/dev/null 2>&1; then
-    USERNAME=root
-fi
-
-# Function to run commands as the appropriate user
-sudo_if() {
-    COMMAND="$*"
-    if [ "$(id -u)" -ne 0 ]; then
-        sudo $COMMAND
-    else
-        $COMMAND
-    fi
-}
-
 echo "Starting yay AUR helper installation..."
 
 # Check if yay is already installed
@@ -112,28 +85,32 @@ else
     # Ensure required packages are installed
     echo "Installing required packages (base-devel, git)..."
     check_and_install_packages base-devel git
+
+    # Create a temporary build user
+    BUILD_USER="builder"
+    useradd -m -G wheel "$BUILD_USER"
+    
+    # Give the build user passwordless sudo privileges
+    echo "$BUILD_USER ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/$BUILD_USER"
     
     # Create temporary directory for yay installation
-    YAY_TMP_DIR=$(mktemp -d)
-    cd "$YAY_TMP_DIR"
+    YAY_TMP_DIR=$(mktemp -d -p "/home/$BUILD_USER")
+    chown "$BUILD_USER" "$YAY_TMP_DIR"
     
     echo "Cloning yay from AUR..."
-    git clone https://aur.archlinux.org/yay.git
+    sudo -u "$BUILD_USER" git clone https://aur.archlinux.org/yay.git "$YAY_TMP_DIR"
     
     echo "Building and installing yay..."
-    cd yay
+    cd "$YAY_TMP_DIR"
     
-    # Build as non-root user if we're currently root
-    if [ "$(id -u)" = "0" ] && [ "${USERNAME}" != "root" ]; then
-        chown -R "${USERNAME}:${USERNAME}" "$YAY_TMP_DIR"
-        sudo -u "${USERNAME}" makepkg -si --noconfirm
-    else
-        makepkg -si --noconfirm
-    fi
+    # Build and install as the build user
+    sudo -u "$BUILD_USER" makepkg -si --noconfirm
     
     # Clean up
     cd /
     rm -rf "$YAY_TMP_DIR"
+    userdel -r "$BUILD_USER"
+    rm -f "/etc/sudoers.d/$BUILD_USER"
     
     echo "Yay installation completed successfully!"
 fi
@@ -145,11 +122,35 @@ if [ -n "$INSTALL_PACKAGES" ]; then
     # Convert comma-separated list to space-separated
     PACKAGES=$(echo "$INSTALL_PACKAGES" | tr ',' ' ')
     
-    # Install packages using yay as appropriate user
-    if [ "$(id -u)" = "0" ] && [ "${USERNAME}" != "root" ]; then
-        sudo -u "${USERNAME}" yay -Sy $PACKAGES --noconfirm
+    # Determine user to run yay as
+    if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ] || [ "${USERNAME}" = "root" ]; then
+        # If running as root or auto, find a non-root user or create one
+        POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+        YAY_USER=""
+        for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
+            if id -u "${CURRENT_USER}" >/dev/null 2>&1; then
+                YAY_USER=${CURRENT_USER}
+                break
+            fi
+        done
+        if [ -z "$YAY_USER" ]; then
+            YAY_USER="yay-user"
+            useradd -m -G wheel "$YAY_USER"
+            echo "$YAY_USER ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/$YAY_USER"
+            echo "Created temporary user $YAY_USER to run yay."
+        fi
     else
-        yay -Sy $PACKAGES --noconfirm
+        YAY_USER="${USERNAME}"
+    fi
+
+    echo "Installing packages as user: $YAY_USER"
+    sudo -u "$YAY_USER" yay -S --noconfirm $PACKAGES
+
+    # Clean up temporary user if created
+    if [ "$YAY_USER" = "yay-user" ]; then
+        userdel -r "$YAY_USER"
+        rm -f "/etc/sudoers.d/$YAY_USER"
+        echo "Removed temporary user $YAY_USER."
     fi
     
     echo "Additional packages installed successfully!"

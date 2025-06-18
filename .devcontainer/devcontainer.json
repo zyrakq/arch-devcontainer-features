@@ -51,7 +51,8 @@
                 ]
             },
             "extensions": [
-                "mads-hartmann.bash-ide-vscode"
+                "mads-hartmann.bash-ide-vscode",
+                "kilocode.kilo-code"
             ]
         }
     },

@@ -71,13 +71,19 @@ arch-devcontainer-features/
 - ✅ **Offline capability**: All necessary scripts available locally
 
 ## 🚀 Quick Start
+### 🎯 Ready-to-use Solutions
 
-### Creating devcontainer.json
+For quick start, you can use:
+
+- **🐳 Ready Images**: [bartventer/devcontainer-images](https://github.com/bartventer/devcontainer-images) - ready-to-use DevContainer images for Arch Linux that can be extended with these features
+- **📋 Templates**: [zyrakq/arch-devcontainer-templates](https://github.com/zyrakq/arch-devcontainer-templates) - DevContainer templates for Arch Linux that can be extended with these features
+
+### 📄 Creating devcontainer.json
 
 ```json
 {
     "name": "Arch Linux DevContainer",
-    "image": "archlinux:latest",
+    "image": "ghcr.io/bartventer/devcontainer-images/base-archlinux:latest",
     "features": {
         "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {
             "installPackages": "git,vim,curl"

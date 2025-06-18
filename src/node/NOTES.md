@@ -46,7 +46,7 @@
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {}
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {}
     }
 }
 ```
@@ -55,7 +55,7 @@
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "installMethod": "nvm",
             "nodeVersion": "18.17.0",
             "nvmVersion": "v0.39.1"
@@ -68,7 +68,7 @@
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "installYarn": true,
             "installPnpm": true,
             "globalPackages": "typescript,nodemon"
@@ -81,7 +81,7 @@
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "nodeVersion": "latest",
             "configureNpmPrefix": false
         }

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #-----------------------------------------------------------------------------------------------------------------
-# Copyright (c) Zeritiq.
+# Copyright (c) Zyrakq.
 # Licensed under the MIT License.
 #-----------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/zeritiq/arch-devcontainer-features/tree/master/src/clone-repo/README.md
-# Maintainer: Zeritiq
+# Docs: https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/clone-repo/README.md
+# Maintainer: Zyrakq
 
 set -e
 

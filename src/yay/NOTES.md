@@ -13,7 +13,7 @@ Yay is an AUR helper written in Go that allows easy installation of packages fro
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {
             "installPackages": "visual-studio-code-bin,discord,google-chrome"
         }
     }

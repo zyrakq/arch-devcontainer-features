@@ -10,7 +10,7 @@ Installs yay - a popular AUR helper for easy installation of packages from the A
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {
             "installPackages": "visual-studio-code-bin,discord"
         }
     }
@@ -23,7 +23,7 @@ Automatically clones a Git repository into your devcontainer workspace during co
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "https://github.com/user/repo.git",
             "targetDir": "/workspace/project"
         }
@@ -37,7 +37,7 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "nodeVersion": "lts",
             "globalPackages": "typescript,nodemon"
         }
@@ -79,14 +79,14 @@ arch-devcontainer-features/
     "name": "Arch Linux DevContainer",
     "image": "archlinux:latest",
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/yay:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {
             "installPackages": "git,vim,curl"
         },
-        "ghcr.io/zeritiq/arch-devcontainer-features/node:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "nodeVersion": "lts",
             "globalPackages": "typescript,nodemon"
         },
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "https://github.com/your-org/your-project.git",
             "targetDir": "/workspace"
         }
@@ -190,9 +190,9 @@ The project includes automated processes:
 ### Publication
 
 Features are automatically published to:
-- `ghcr.io/zeritiq/arch-devcontainer-features/yay`
-- `ghcr.io/zeritiq/arch-devcontainer-features/clone-repo`
-- `ghcr.io/zeritiq/arch-devcontainer-features/node`
+- `ghcr.io/zyrakq/arch-devcontainer-features/yay`
+- `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
+- `ghcr.io/zyrakq/arch-devcontainer-features/node`
 
 ## 📖 Documentation
 
@@ -232,8 +232,8 @@ Thanks to the authors for their contributions to the DevContainers ecosystem!
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/zeritiq/arch-devcontainer-features/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zeritiq/arch-devcontainer-features/discussions)
+- **Issues**: [GitHub Issues](https://github.com/zyrakq/arch-devcontainer-features/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/zyrakq/arch-devcontainer-features/discussions)
 - **Documentation**: [DevContainers.dev](https://containers.dev/)
 
 ---

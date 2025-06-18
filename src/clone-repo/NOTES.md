@@ -17,7 +17,7 @@ This feature automatically handles SSH cloning using the built-in `postCreateCom
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "git@github.com:user/private-repo.git",
             "targetDir": "/workspace/my-project",
             "branch": "main"
@@ -30,7 +30,7 @@ This feature automatically handles SSH cloning using the built-in `postCreateCom
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "https://github.com/user/repo.git",
             "targetDir": "/workspace/my-project",
             "branch": "main"
@@ -43,7 +43,7 @@ This feature automatically handles SSH cloning using the built-in `postCreateCom
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "git@github.com:microsoft/vscode.git",
             "targetDir": "/workspace/vscode-source"
         }
@@ -55,7 +55,7 @@ This feature automatically handles SSH cloning using the built-in `postCreateCom
 ```json
 {
     "features": {
-        "ghcr.io/zeritiq/arch-devcontainer-features/clone-repo:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "git@github.com:company/private-repo.git",
             "targetDir": "/workspace/vscode-dev",
             "branch": "development"

@@ -7,7 +7,15 @@ Yay is an AUR helper written in Go that allows easy installation of packages fro
 -   📥 Clones and builds yay from AUR
 -   ➕ Optionally installs additional AUR packages
 
-## 💡 Example Configurations
+## 🚀 Quick Start with Templates
+
+Instead of configuring from scratch, you can use ready-to-use solutions:
+
+- **🐳 Ready Images**: [bartventer/devcontainer-images](https://github.com/bartventer/devcontainer-images) - pre-built DevContainer images for Arch Linux that include this feature
+- **📋 Templates**: [zyrakq/arch-devcontainer-templates](https://github.com/zyrakq/arch-devcontainer-templates) - DevContainer templates for Arch Linux with this feature pre-configured
+
+These solutions provide a faster way to get started with Arch Linux DevContainers that already include the yay AUR helper feature.
+## � Example Configurations
 
 ### With Additional AUR Packages
 ```json

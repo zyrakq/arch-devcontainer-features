@@ -11,7 +11,15 @@ This feature allows you to automatically clone a Git repository into a specified
 
 This feature automatically handles SSH cloning using the built-in `postCreateCommand` lifecycle hook. No additional configuration needed in your `devcontainer.json` - the SSH-compatible cloning script is executed automatically after container creation when SSH keys and agent are available.
 
-## 💡 Example Configurations
+## 🚀 Quick Start with Templates
+
+Instead of configuring from scratch, you can use ready-to-use solutions:
+
+- **🐳 Ready Images**: [bartventer/devcontainer-images](https://github.com/bartventer/devcontainer-images) - pre-built DevContainer images for Arch Linux that include this feature
+- **📋 Templates**: [zyrakq/arch-devcontainer-templates](https://github.com/zyrakq/arch-devcontainer-templates) - DevContainer templates for Arch Linux with this feature pre-configured
+
+These solutions provide a faster way to get started with Arch Linux DevContainers that already include the repository cloning feature.
+## � Example Configurations
 
 ### SSH Repository (Recommended for private repos)
 ```json

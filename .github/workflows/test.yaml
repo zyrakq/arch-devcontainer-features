@@ -16,14 +16,10 @@ jobs:
           - yay
           - clone-repo
           - node
+          - dotnet
         baseImage:
           - archlinux:latest
-        exclude:
-          # Both features only work on Arch Linux
-          - features: yay
-            baseImage: archlinux:latest
-          - features: clone-repo
-            baseImage: archlinux:latest
+        # No exclusions needed - all features work on archlinux:latest
     steps:
       - uses: actions/checkout@v4
 
@@ -42,6 +38,7 @@ jobs:
           - yay
           - clone-repo
           - node
+          - dotnet
     steps:
       - uses: actions/checkout@v4
 

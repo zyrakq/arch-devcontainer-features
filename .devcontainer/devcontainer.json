@@ -52,6 +52,7 @@
             },
             "extensions": [
                 "mads-hartmann.bash-ide-vscode",
+                "eamodio.gitlens",
                 "kilocode.kilo-code"
             ]
         }

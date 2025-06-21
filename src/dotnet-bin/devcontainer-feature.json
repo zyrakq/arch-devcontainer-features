@@ -1,0 +1,39 @@
+{
+    "id": "dotnet-bin",
+    "version": "1.0.0",
+    "name": ".NET SDK and Runtime (AUR)",
+    "description": "Installs .NET SDK and runtime from AUR packages for Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "dependsOn": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay": {}
+    },
+    "options": {
+        "dotnetVersion": {
+            "type": "string",
+            "default": "latest",
+            "description": ".NET version to install (latest, 8.0, 7.0, 6.0)"
+        },
+        "installEntityFramework": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install Entity Framework Core CLI (dotnet-ef)"
+        },
+        "installAspNetCodeGenerator": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install ASP.NET Core Code Generator"
+        },
+        "installDevCerts": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install development certificates tool"
+        },
+        "installGlobalTools": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of additional global tools to install"
+        }
+    }
+}

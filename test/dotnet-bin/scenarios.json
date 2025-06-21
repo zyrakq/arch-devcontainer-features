@@ -1,0 +1,38 @@
+{
+    "aur_basic": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "dotnet-bin": {}
+        }
+    },
+    "aur_with_tools": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "dotnet-bin": {
+                "installEntityFramework": true,
+                "installAspNetCodeGenerator": true,
+                "installDevCerts": true
+            }
+        }
+    },
+    "aur_custom_tools": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "dotnet-bin": {
+                "installGlobalTools": "dotnet-format"
+            }
+        }
+    },
+    "aur_specific_version": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "dotnet-bin": {
+                "dotnetVersion": "latest"
+            }
+        }
+    }
+}

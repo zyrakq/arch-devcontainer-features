@@ -45,6 +45,35 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 }
 ```
 
+### 🟣 [.NET SDK and Runtime](src/dotnet/README.md)
+Installs .NET SDK, runtime, and development tools from official Arch Linux packages.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet:1": {
+            "dotnetVersion": "8.0",
+            "installEntityFramework": true,
+            "installGlobalTools": "dotnet-format"
+        }
+    }
+}
+```
+
+### 🟣 [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md)
+Legacy feature that installs .NET SDK and runtime from AUR packages. ASP.NET Core Runtime is included automatically.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {},
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin:1": {
+            "dotnetVersion": "latest"
+        }
+    }
+}
+```
+
 ## 🏗️ Architecture
 
 ### Stable Dependency on bartventer/arch-devcontainer-features
@@ -56,7 +85,9 @@ arch-devcontainer-features/
 ├── src/                     # Our features
 │   ├── yay/
 │   ├── clone-repo/
-│   └── node/
+│   ├── node/
+│   ├── dotnet/
+│   └── dotnet-bin/
 └── vendor/                  # Dependencies
     └── bartventer-features/ # Git submodule v1.24.5
         └── scripts/
@@ -92,12 +123,16 @@ For quick start, you can use:
             "nodeVersion": "lts",
             "globalPackages": "typescript,nodemon"
         },
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet:1": {
+            "dotnetVersion": "8.0",
+            "installEntityFramework": true
+        },
         "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "https://github.com/your-org/your-project.git",
             "targetDir": "/workspace"
         }
     },
-    "postCreateCommand": "node --version && npm --version && echo 'DevContainer ready!'"
+    "postCreateCommand": "node --version && npm --version && dotnet --version && echo 'DevContainer ready!'"
 }
 ```
 
@@ -157,10 +192,19 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   └── README.md
-│   └── node/               # Node.js and npm feature
+│   ├── node/               # Node.js and npm feature
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   └── README.md
+│   ├── dotnet/             # .NET SDK and runtime feature (official packages)
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   ├── NOTES.md
+│   │   └── README.md
+│   └── dotnet-bin/         # .NET SDK and runtime feature (AUR packages)
 │       ├── devcontainer-feature.json
 │       ├── install.sh
-│       └── README.md
+│       └── NOTES.md
 ├── vendor/                 # Git submodule dependencies
 │   └── bartventer-features/
 ├── test/                   # Feature tests
@@ -199,12 +243,16 @@ Features are automatically published to:
 - `ghcr.io/zyrakq/arch-devcontainer-features/yay`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
+- `ghcr.io/zyrakq/arch-devcontainer-features/dotnet`
+- `ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin`
 
 ## 📖 Documentation
 
 - [Yay AUR Helper](src/yay/README.md) - Detailed yay feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
+- [.NET SDK and Runtime](src/dotnet/README.md) - .NET feature documentation (official packages)
+- [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md) - .NET feature documentation (AUR packages)
 - [DevContainers Specification](https://containers.dev/implementors/features/) - Official specification
 
 ## 🤝 Contributing

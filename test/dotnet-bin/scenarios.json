@@ -1,0 +1,9 @@
+{
+    "basic": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "dotnet-bin": {}
+        }
+    }
+}

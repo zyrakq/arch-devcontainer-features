@@ -6,7 +6,7 @@ This feature installs .NET SDK and runtime from AUR packages for Arch Linux DevC
 -   📦 Uses AUR binary packages (dotnet-*-bin) for compatibility
 -   🔄 Requires yay AUR helper for installation
 -   🛠️ Configures global tools directory and PATH
--   🔧 Simplified installation without complex options
+-   🌍 Optionally installs Entity Framework CLI, Code Generator, and custom tools
 
 **⚠️ Note**: This feature is provided for backward compatibility. For new projects, consider using the main `dotnet` feature with official packages (`packageManager: "pacman"`).
 
@@ -41,11 +41,57 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 }
 ```
 
+### Advanced Configuration with Global Tools
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {},
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin:1": {
+            "installEntityFramework": true,
+            "installAspNetCodeGenerator": true,
+            "installDevCerts": true,
+            "installGlobalTools": "dotnet-format"
+        }
+    }
+}
+```
+
+### Web Development Setup
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {},
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin:1": {
+            "installEntityFramework": true,
+            "installAspNetCodeGenerator": true,
+            "installDevCerts": true
+        }
+    }
+}
+```
+
+### API Development
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {},
+        "ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin:1": {
+            "installEntityFramework": true,
+            "installGlobalTools": "dotnet-format"
+        }
+    }
+}
+```
+
 ## 📋 Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `dotnetVersion` | string | `"latest"` | .NET version to install (AUR packages provide latest versions) |
+| `installEntityFramework` | boolean | `false` | Install Entity Framework Core CLI (dotnet-ef) |
+| `installAspNetCodeGenerator` | boolean | `false` | Install ASP.NET Core Code Generator |
+| `installDevCerts` | boolean | `false` | Install development certificates tool |
+| `installGlobalTools` | string | `""` | Comma-separated list of additional global tools to install |
 
 **Note:** ASP.NET Core Runtime is automatically included with AUR packages and cannot be disabled.
 
@@ -57,7 +103,31 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 - **.NET SDK** (`dotnet-sdk-bin`) - Complete .NET development kit
 - **ASP.NET Core Runtime** (`aspnet-runtime-bin`) - Web application runtime (automatically included)
 
-## 🔍 Verification
+### Global Tools (Optional)
+- **Entity Framework Core CLI** (`dotnet-ef`) - Database migrations and scaffolding
+- **ASP.NET Core Code Generator** (`dotnet-aspnet-codegenerator`) - Code scaffolding for MVC/API
+- **Development Certificates** (`dotnet-dev-certs`) - HTTPS development certificates
+- **Custom Tools** - Any additional tools specified in `installGlobalTools`
+
+## 🛠️ Global Tools
+
+After installation, you can install additional global tools:
+
+```bash
+# Install Entity Framework CLI
+dotnet tool install --global dotnet-ef
+
+# Install code formatting tool
+dotnet tool install --global dotnet-format
+
+# List installed tools
+dotnet tool list --global
+
+# Update all tools
+dotnet tool update --global dotnet-ef
+```
+
+## � Verification
 
 After installation, verify everything works:
 
@@ -70,6 +140,9 @@ dotnet --list-sdks
 
 # List installed runtimes
 dotnet --list-runtimes
+
+# Check global tools
+dotnet tool list --global
 
 # Create a new console app (test)
 dotnet new console -n TestApp
@@ -123,6 +196,15 @@ This feature uses a stable architecture with Git submodules:
 - Check if yay is properly configured
 - Try installing manually: `yay -S dotnet-sdk-bin`
 
+**Global tool installation fails**
+- Verify internet connection
+- Check if the tool name is correct
+- Try installing manually: `dotnet tool install --global <tool-name>`
+
+**Permission errors**
+- The feature automatically handles permissions
+- Global tools are installed in user directory (`~/.dotnet/tools`)
+
 ### Getting Help
 
 - Check the [feature documentation](https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/dotnet-bin)
@@ -136,7 +218,7 @@ This feature uses a stable architecture with Git submodules:
 -   **Simplified**: Minimal options compared to the main dotnet feature
 -   **Requires yay**: Must install yay feature first
 -   **Latest Versions**: AUR binary packages typically provide latest .NET versions
--   **No Global Tools**: This feature focuses on basic .NET installation only
+-   **Global Tools Support**: Supports installation of Entity Framework CLI, ASP.NET Code Generator, and custom tools
 
 ## 📋 Requirements
 

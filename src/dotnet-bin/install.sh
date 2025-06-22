@@ -11,6 +11,10 @@ set -e
 
 # shellcheck disable=SC2034
 DOTNET_VERSION="${DOTNETVERSION:-"latest"}"
+INSTALL_ENTITY_FRAMEWORK="${INSTALLENTITYFRAMEWORK:-"false"}"
+INSTALL_ASPNET_CODEGENERATOR="${INSTALLASPNETCODEGENERATOR:-"false"}"
+INSTALL_DEV_CERTS="${INSTALLDEVCERTS:-"false"}"
+INSTALL_GLOBAL_TOOLS="${INSTALLGLOBALTOOLS:-""}"
 USERNAME="${USERNAME:-"${_REMOTE_USER:-"automatic"}"}"
 
 # **************************
@@ -142,6 +146,32 @@ run_yay() {
     fi
 }
 
+# Function to run commands as non-root user
+run_as_user() {
+    COMMAND="$*"
+    if [ "$(id -u)" = "0" ] && [ "${USERNAME}" != "root" ]; then
+        sudo -u "${USERNAME}" bash -c "$COMMAND"
+    else
+        bash -c "$COMMAND"
+    fi
+}
+
+# Function to check if a global tool exists in NuGet
+check_tool_availability() {
+    local tool_name="$1"
+    echo "Checking availability of tool: $tool_name"
+    
+    # Try to get package info from NuGet API
+    local nuget_url="https://api.nuget.org/v3-flatcontainer/${tool_name}/index.json"
+    if curl -s --fail "$nuget_url" >/dev/null 2>&1; then
+        echo "✓ Tool $tool_name is available in NuGet"
+        return 0
+    else
+        echo "✗ Tool $tool_name is not available in NuGet"
+        return 1
+    fi
+}
+
 # Function to get AUR package names
 get_aur_packages() {
     # AUR packages include ASP.NET runtime automatically as dependency
@@ -226,6 +256,81 @@ if [ "${USERNAME}" != "root" ]; then
     echo "Configured .NET tools PATH: $DOTNET_TOOLS_PATH"
 fi
 
+# Install global tools
+TOOLS_TO_INSTALL=""
+
+# Add predefined tools based on options
+if [ "$INSTALL_ENTITY_FRAMEWORK" = "true" ]; then
+    TOOLS_TO_INSTALL="$TOOLS_TO_INSTALL dotnet-ef"
+    echo "Entity Framework Core CLI will be installed"
+fi
+
+if [ "$INSTALL_ASPNET_CODEGENERATOR" = "true" ]; then
+    TOOLS_TO_INSTALL="$TOOLS_TO_INSTALL dotnet-aspnet-codegenerator"
+    echo "ASP.NET Core Code Generator will be installed"
+fi
+
+if [ "$INSTALL_DEV_CERTS" = "true" ]; then
+    TOOLS_TO_INSTALL="$TOOLS_TO_INSTALL dotnet-dev-certs"
+    echo "Development certificates tool will be installed"
+fi
+
+# Add custom global tools
+if [ -n "$INSTALL_GLOBAL_TOOLS" ]; then
+    # Convert comma-separated list to space-separated
+    CUSTOM_TOOLS=$(echo "$INSTALL_GLOBAL_TOOLS" | tr ',' ' ')
+    TOOLS_TO_INSTALL="$TOOLS_TO_INSTALL $CUSTOM_TOOLS"
+    echo "Additional global tools will be installed: $CUSTOM_TOOLS"
+fi
+
+# Install global tools if any are specified
+if [ -n "$TOOLS_TO_INSTALL" ]; then
+    echo "Installing .NET global tools: $TOOLS_TO_INSTALL"
+    
+    AVAILABLE_TOOLS=""
+    UNAVAILABLE_TOOLS=""
+    
+    # Check availability of each tool first
+    for tool in $TOOLS_TO_INSTALL; do
+        if check_tool_availability "$tool"; then
+            AVAILABLE_TOOLS="$AVAILABLE_TOOLS $tool"
+        else
+            UNAVAILABLE_TOOLS="$UNAVAILABLE_TOOLS $tool"
+        fi
+    done
+    
+    # Report unavailable tools
+    if [ -n "$UNAVAILABLE_TOOLS" ]; then
+        echo "Warning: The following tools are not available in NuGet and will be skipped:$UNAVAILABLE_TOOLS"
+    fi
+    
+    # Install available tools
+    if [ -n "$AVAILABLE_TOOLS" ]; then
+        echo "Installing available global tools:$AVAILABLE_TOOLS"
+        
+        for tool in $AVAILABLE_TOOLS; do
+            echo "Installing global tool: $tool"
+            if [ "${USERNAME}" != "root" ]; then
+                if run_as_user "export PATH=\"$DOTNET_TOOLS_PATH:\$PATH\" && dotnet tool install --global $tool"; then
+                    echo "✓ Successfully installed: $tool"
+                else
+                    echo "✗ Failed to install: $tool"
+                fi
+            else
+                if dotnet tool install --global $tool; then
+                    echo "✓ Successfully installed: $tool"
+                else
+                    echo "✗ Failed to install: $tool"
+                fi
+            fi
+        done
+        
+        echo "Global tools installation completed!"
+    else
+        echo "No available global tools to install."
+    fi
+fi
+
 echo ".NET feature installation completed!"
 
 # Display installation summary
@@ -241,6 +346,16 @@ if command -v dotnet &> /dev/null; then
     # Check installed SDKs
     echo "Installed SDKs:"
     dotnet --list-sdks 2>/dev/null || echo "  Unable to list SDKs"
+    
+    # List global tools if any were installed
+    if [ -n "$TOOLS_TO_INSTALL" ]; then
+        echo "Installed global tools:"
+        if [ "${USERNAME}" != "root" ]; then
+            run_as_user "export PATH=\"$DOTNET_TOOLS_PATH:\$PATH\" && dotnet tool list --global" 2>/dev/null || echo "  Unable to list global tools"
+        else
+            dotnet tool list --global 2>/dev/null || echo "  Unable to list global tools"
+        fi
+    fi
     
     if [ "${USERNAME}" != "root" ]; then
         echo ".NET tools path: $DOTNET_TOOLS_PATH"

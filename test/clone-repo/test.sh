@@ -14,7 +14,7 @@ source dev-container-features-test-lib
 
 # Test that git is available
 check "git is installed" git --version
-check "git is executable" which git
+check "git is executable" command -v git
 
 # Test that the clone script is installed
 check "clone script exists" test -f /usr/local/bin/clone-repo-ssh

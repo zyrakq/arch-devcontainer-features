@@ -1,0 +1,51 @@
+{
+    "pacman_basic": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {}
+        }
+    },
+    "pacman_with_aspnet": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {
+                "installAspNetRuntime": true
+            }
+        }
+    },
+    "pacman_with_tools": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {
+                "installEntityFramework": true,
+                "installAspNetCodeGenerator": true,
+                "installDevCerts": true
+            }
+        }
+    },
+    "pacman_custom_tools": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {
+                "installGlobalTools": "dotnet-format"
+            }
+        }
+    },
+    "pacman_specific_version": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {
+                "dotnetVersion": "8.0",
+                "installAspNetRuntime": true
+            }
+        }
+    },
+    "pacman_minimal": {
+        "image": "archlinux:latest",
+        "features": {
+            "dotnet": {
+                "installAspNetRuntime": false
+            }
+        }
+    }
+}

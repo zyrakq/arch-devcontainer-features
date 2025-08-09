@@ -14,9 +14,9 @@
     ],
     "remoteUser": "vscode",
     "runArgs": [
-        "--name", "arch-devcontainer-features-workspace",
+        "--name",
+        "arch-devcontainer-features-workspace",
         "--network=arch-devcontainer-features-workspace-network"
-    
     ],
     "features": {
         "ghcr.io/bartventer/arch-devcontainer-features/common-utils:1": {
@@ -58,6 +58,13 @@
         }
     },
     "initializeCommand": [
-        "bash", "-c", "docker network ls | grep -q arch-devcontainer-features-workspace-network || docker network create arch-devcontainer-features-workspace-network"
+        "bash",
+        "-c",
+        "docker network ls | grep -q arch-devcontainer-features-workspace-network || docker network create arch-devcontainer-features-workspace-network"
+    ],
+    "postCreateCommand": [
+        "bash",
+        "-c",
+        "git config --global commit.template /workspace/arch-devcontainer-features/.gitmessage"
     ]
 }

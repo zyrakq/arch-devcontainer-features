@@ -25,5 +25,11 @@
                 "repoUrl": "https://github.com/devcontainers/features.git"
             }
         }
+    },
+    "test_existing_repo": {
+        "image": "archlinux:latest",
+        "features": {
+            "clone-repo": {}
+        }
     }
 }

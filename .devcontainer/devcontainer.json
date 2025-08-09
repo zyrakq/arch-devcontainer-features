@@ -51,8 +51,19 @@
                 ]
             },
             "extensions": [
+                // VSCode
+                "vscode-icons-team.vscode-icons",
+                "aaron-bond.better-comments",
+                "IBM.output-colorizer",
+                // Markdown
+                "davidanson.vscode-markdownlint",
+                "bierner.markdown-mermaid",
+                // Bash
                 "mads-hartmann.bash-ide-vscode",
+                // Git
                 "eamodio.gitlens",
+                "codezombiech.gitignore",
+                // AI Assistant
                 "kilocode.kilo-code"
             ]
         }

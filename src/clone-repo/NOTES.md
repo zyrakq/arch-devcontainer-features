@@ -154,13 +154,16 @@ Common SSH issues and solutions:
 
 ## 📝 Notes
 
--   If target directory already exists and contains files, a timestamped backup is created
+-   **Smart repository detection**: If target directory already contains a git repository with the same URL, cloning is skipped automatically
+-   **Repository URL validation**: If target directory contains a different repository, the feature will exit with an error message instead of overwriting
+-   If target directory exists but is not a git repository, a timestamped backup is created before cloning
 -   Feature ensures proper file ownership for cloned files
 -   Git must be available in the container (usually installed in base image)
 -   If no repository URL is provided, feature skips cloning without errors
 -   Correctly handles permissions for both root and non-root users
 -   **SSH URLs are detected automatically** - no special configuration needed
 -   **HTTPS fallback suggestions** provided if SSH clone fails
+-   **Container rebuild friendly**: Perfect for scenarios where workspace is mounted as volume and container is rebuilt
 
 ## 🔧 Troubleshooting
 
@@ -172,6 +175,10 @@ If you encounter cloning issues:
 4.  **Permissions**: Check user has write permissions to target directory
 5.  **Branch existence**: Ensure specified branch exists in the repository
 6.  **Feature execution**: Check container logs for clone script execution during postCreateCommand
+7.  **Repository URL mismatch**: If you get "Cannot clone - target directory contains a different repository", either:
+    -   Remove the existing directory manually
+    -   Use a different `targetDir` path
+    -   Update the `repoUrl` to match the existing repository
 
 ## 📋 Requirements
 

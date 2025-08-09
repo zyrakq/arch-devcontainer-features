@@ -194,7 +194,29 @@ if [ ! -d "$TARGET_DIR" ]; then
     mkdir -p "$TARGET_DIR"
 fi
 
-# If target directory is not empty, back it up
+# Check if target directory is already a git repository
+if [ -d "$TARGET_DIR/.git" ]; then
+    echo "Git repository already exists in $TARGET_DIR"
+    
+    # Check if remote URL matches
+    EXISTING_URL=$(git -C "$TARGET_DIR" remote get-url origin 2>/dev/null || echo "")
+    if [ "$EXISTING_URL" = "$REPO_URL" ]; then
+        echo "Repository with correct URL already exists, skipping clone..."
+        echo "Clone repository feature completed successfully!"
+        # Clean up the config file (use sudo_if since file was created as root)
+        sudo_if rm -f "$CONFIG_FILE"
+        exit 0
+    else
+        echo "Repository exists but with different URL:"
+        echo "  Existing: $EXISTING_URL"
+        echo "  Expected: $REPO_URL"
+        echo "Cannot clone - target directory contains a different repository."
+        echo "Please manually remove the directory or use a different target path."
+        exit 1
+    fi
+fi
+
+# If target directory is not empty (but not a git repo), back it up
 if [ -d "$TARGET_DIR" ] && [ "$(ls -A $TARGET_DIR)" ]; then
     BACKUP_DIR="${TARGET_DIR}.backup.$(date +%s)"
     echo "Target directory is not empty, backing up to: $BACKUP_DIR"

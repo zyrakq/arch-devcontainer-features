@@ -1,13 +1,15 @@
+# 🟣 .NET SDK and Runtime
+
 ## 📝 Description
 
 This feature installs .NET SDK, runtime, and development tools for Arch Linux DevContainers using official packages from the `extra` repository. Automatically:
 
--   ✅ Installs .NET Host, SDK, and optionally ASP.NET Core Runtime
--   📦 Uses official packages from `extra` repository by default (faster, more secure)
+- ✅ Installs .NET Host, SDK, and optionally ASP.NET Core Runtime
+- 📦 Uses official packages from `extra` repository by default (faster, more secure)
 
--   � Configures global tools directory and PATH
--   🌍 Optionally installs Entity Framework CLI, Code Generator, and custom tools
--   🛡️ Handles proper permissions and user management
+- � Configures global tools directory and PATH
+- 🌍 Optionally installs Entity Framework CLI, Code Generator, and custom tools
+- 🛡️ Handles proper permissions and user management
 
 For AUR packages, use the separate [`dotnet-bin`](https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/dotnet-bin) feature instead.
 
@@ -23,6 +25,7 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ## 📋 Example Configurations
 
 ### Basic Installation (Latest .NET)
+
 ```json
 {
     "features": {
@@ -32,6 +35,7 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ```
 
 ### Advanced Configuration
+
 ```json
 {
     "features": {
@@ -47,9 +51,8 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 }
 ```
 
-
-
 ### Web Development Setup
+
 ```json
 {
     "features": {
@@ -64,6 +67,7 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ```
 
 ### API Development
+
 ```json
 {
     "features": {
@@ -77,6 +81,7 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ```
 
 ### Console Applications (Minimal)
+
 ```json
 {
     "features": {
@@ -88,6 +93,7 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ```
 
 ### Specific Version
+
 ```json
 {
     "features": {
@@ -113,13 +119,13 @@ These solutions provide a faster way to get started with Arch Linux DevContainer
 ## 🔧 What's Installed
 
 ### Core Components
+
 - **.NET Host** (`dotnet-host`) - Core .NET runtime host (installed automatically as dependency)
 - **.NET SDK** (`dotnet-sdk`) - Complete .NET development kit
 - **ASP.NET Core Runtime** (`aspnet-runtime`) - Web application runtime (optional)
 
-
-
 ### Global Tools (Optional)
+
 - **Entity Framework Core CLI** (`dotnet-ef`) - Database migrations and scaffolding
 - **ASP.NET Core Code Generator** (`dotnet-aspnet-codegenerator`) - Code scaffolding for MVC/API
 - **Development Certificates** (`dotnet-dev-certs`) - HTTPS development certificates
@@ -168,9 +174,9 @@ dotnet run
 
 ## ✅ Compatibility
 
--   **Architecture**: `linux/amd64`, `linux/arm64`
--   **Operating System**: Arch Linux
--   **Requirements**: pacman (built-in)
+- **Architecture**: `linux/amd64`, `linux/arm64`
+- **Operating System**: Arch Linux
+- **Requirements**: pacman (built-in)
 
 ## 📦 Installation Order
 
@@ -188,17 +194,18 @@ No additional dependencies required - uses built-in pacman:
 
 This feature uses a stable architecture with Git submodules:
 
--   **Arch Linux Utilities**: Used through [bartventer/arch-devcontainer-features](https://github.com/bartventer/arch-devcontainer-features)
--   **Stable Version**: Scripts downloaded from submodule commit hash (currently pinned to specific commit)
--   **Dynamic URLs**: Install script dynamically determines submodule commit and downloads from correct version
--   **Reliability**: Falls back to `main` branch if specific commit is not found
+- **Arch Linux Utilities**: Used through [bartventer/arch-devcontainer-features](https://github.com/bartventer/arch-devcontainer-features)
+- **Stable Version**: Scripts downloaded from submodule commit hash (currently pinned to specific commit)
+- **Dynamic URLs**: Install script dynamically determines submodule commit and downloads from correct version
+- **Reliability**: Falls back to `main` branch if specific commit is not found
 
 ### 🔄 Script Version Updates
 
 The feature downloads utility scripts based on the current submodule commit hash. Script versions are only updated when:
-1.  The bartventer-features submodule is updated to a new commit/tag
-2.  Changes are committed to this repository
-3.  Features are republished to GHCR
+
+1. The bartventer-features submodule is updated to a new commit/tag
+2. Changes are committed to this repository
+3. Features are republished to GHCR
 
 **📝 Note**: Scripts are not automatically updated - they follow the specific commit referenced by the submodule.
 
@@ -206,18 +213,19 @@ The feature downloads utility scripts based on the current submodule commit hash
 
 ### Common Issues
 
+#### Dotnet command not found
 
-
-**"dotnet command not found"**
 - Restart your terminal or reload shell profile
 - Check if PATH includes dotnet tools directory
 
-**Global tool installation fails**
+#### Global tool installation fails
+
 - Verify internet connection
 - Check if the tool name is correct
 - Try installing manually: `dotnet tool install --global <tool-name>`
 
-**Permission errors**
+#### Permission errors
+
 - The feature automatically handles permissions
 - Global tools are installed in user directory (`~/.dotnet/tools`)
 
@@ -229,15 +237,15 @@ The feature downloads utility scripts based on the current submodule commit hash
 
 ## 📝 Notes
 
--   Feature checks for existing .NET installation and configures accordingly
--   Global tools are installed in user directory to avoid sudo requirements
--   Automatically configures bash and zsh for dotnet tools PATH
--   Correctly handles permissions for both root and non-root users
--   Uses official packages from `extra` repository (faster, more secure)
--   Official packages provide better integration with system libraries
+- Feature checks for existing .NET installation and configures accordingly
+- Global tools are installed in user directory to avoid sudo requirements
+- Automatically configures bash and zsh for dotnet tools PATH
+- Correctly handles permissions for both root and non-root users
+- Uses official packages from `extra` repository (faster, more secure)
+- Official packages provide better integration with system libraries
 
 ## 📋 Requirements
 
--   Container must be running Arch Linux
--   Internet connection for downloading packages from official repositories
--   User must have appropriate permissions for package installation
+- Container must be running Arch Linux
+- Internet connection for downloading packages from official repositories
+- User must have appropriate permissions for package installation

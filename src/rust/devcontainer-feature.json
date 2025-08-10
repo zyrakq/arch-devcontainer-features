@@ -1,0 +1,41 @@
+{
+    "id": "rust",
+    "version": "1.0.0",
+    "name": "Rust and Cargo",
+    "description": "Installs Rust, Cargo, and development tools via rustup for Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "options": {
+        "rustVersion": {
+            "type": "string",
+            "enum": [
+                "stable",
+                "beta",
+                "nightly"
+            ],
+            "default": "stable",
+            "description": "Rust toolchain version to install"
+        },
+        "additionalTargets": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of additional compilation targets (e.g., 'wasm32-unknown-unknown,x86_64-pc-windows-gnu')"
+        },
+        "installClippy": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install clippy linter"
+        },
+        "installRustfmt": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install rustfmt code formatter"
+        },
+        "globalCrates": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of crates to install globally via cargo install"
+        }
+    }
+}

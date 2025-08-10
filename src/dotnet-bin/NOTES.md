@@ -1,12 +1,14 @@
+# 🟣 .NET SDK and Runtime (AUR)
+
 ## 📝 Description
 
 This feature installs .NET SDK and runtime from AUR packages for Arch Linux DevContainers. This is a legacy/compatibility feature that provides .NET through AUR binary packages. Automatically:
 
--   ✅ Installs .NET Host, SDK, and ASP.NET Core Runtime from AUR
--   📦 Uses AUR binary packages (dotnet-*-bin) for compatibility
--   🔄 Requires yay AUR helper for installation
--   🛠️ Configures global tools directory and PATH
--   🌍 Optionally installs Entity Framework CLI, Code Generator, and custom tools
+- ✅ Installs .NET Host, SDK, and ASP.NET Core Runtime from AUR
+- 📦 Uses AUR binary packages (dotnet-*-bin) for compatibility
+- 🔄 Requires yay AUR helper for installation
+- 🛠️ Configures global tools directory and PATH
+- 🌍 Optionally installs Entity Framework CLI, Code Generator, and custom tools
 
 **⚠️ Note**: This feature is provided for backward compatibility. For new projects, consider using the main `dotnet` feature with official packages (`packageManager: "pacman"`).
 
@@ -20,6 +22,7 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ## 📋 Example Configurations
 
 ### Basic Installation (Latest .NET from AUR)
+
 ```json
 {
     "features": {
@@ -30,6 +33,7 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ```
 
 ### With Version Specification
+
 ```json
 {
     "features": {
@@ -42,6 +46,7 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ```
 
 ### Advanced Configuration with Global Tools
+
 ```json
 {
     "features": {
@@ -57,6 +62,7 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ```
 
 ### Web Development Setup
+
 ```json
 {
     "features": {
@@ -71,6 +77,7 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ```
 
 ### API Development
+
 ```json
 {
     "features": {
@@ -98,12 +105,14 @@ Instead of configuring from scratch, you can use ready-to-use solutions:
 ## 🔧 What's Installed
 
 ### Core Components (AUR Binary Packages)
+
 - **.NET Host** (`dotnet-host-bin`) - Core .NET runtime host
 - **.NET Runtime** (`dotnet-runtime-bin`) - .NET runtime
 - **.NET SDK** (`dotnet-sdk-bin`) - Complete .NET development kit
 - **ASP.NET Core Runtime** (`aspnet-runtime-bin`) - Web application runtime (automatically included)
 
 ### Global Tools (Optional)
+
 - **Entity Framework Core CLI** (`dotnet-ef`) - Database migrations and scaffolding
 - **ASP.NET Core Code Generator** (`dotnet-aspnet-codegenerator`) - Code scaffolding for MVC/API
 - **Development Certificates** (`dotnet-dev-certs`) - HTTPS development certificates
@@ -152,14 +161,15 @@ dotnet run
 
 ## ✅ Compatibility
 
--   **Architecture**: `linux/amd64`, `linux/arm64`
--   **Operating System**: Arch Linux
--   **Requirements**: yay AUR helper (installed via yay feature)
+- **Architecture**: `linux/amd64`, `linux/arm64`
+- **Operating System**: Arch Linux
+- **Requirements**: yay AUR helper (installed via yay feature)
 
 ## 📦 Installation Order
 
 This feature requires and installs after:
--   **`ghcr.io/zyrakq/arch-devcontainer-features/yay`** - Required for AUR package installation
+
+- **`ghcr.io/zyrakq/arch-devcontainer-features/yay`** - Required for AUR package installation
 
 ```json
 {
@@ -174,34 +184,39 @@ This feature requires and installs after:
 
 This feature uses a stable architecture with Git submodules:
 
--   **Arch Linux Utilities**: Used through [bartventer/arch-devcontainer-features](https://github.com/bartventer/arch-devcontainer-features)
--   **Stable Version**: Scripts downloaded from submodule commit hash
--   **AUR Integration**: Uses yay for installing binary packages from AUR
--   **Simplified**: Minimal configuration options for basic .NET development
+- **Arch Linux Utilities**: Used through [bartventer/arch-devcontainer-features](https://github.com/bartventer/arch-devcontainer-features)
+- **Stable Version**: Scripts downloaded from submodule commit hash
+- **AUR Integration**: Uses yay for installing binary packages from AUR
+- **Simplified**: Minimal configuration options for basic .NET development
 
 ## 🔧 Troubleshooting
 
 ### Common Issues
 
-**"yay command not found"**
+#### yay command not found
+
 - Ensure the yay feature is installed first
 - Check the installation order in your devcontainer.json
 
-**"dotnet command not found"**
+#### dotnet command not found
+
 - Restart your terminal or reload shell profile
 - Check if PATH includes dotnet tools directory
 
-**AUR package installation fails**
+#### AUR package installation fails
+
 - Verify internet connection
 - Check if yay is properly configured
 - Try installing manually: `yay -S dotnet-sdk-bin`
 
-**Global tool installation fails**
+#### Global tool installation fails
+
 - Verify internet connection
 - Check if the tool name is correct
 - Try installing manually: `dotnet tool install --global <tool-name>`
 
-**Permission errors**
+#### Permission errors
+
 - The feature automatically handles permissions
 - Global tools are installed in user directory (`~/.dotnet/tools`)
 
@@ -213,19 +228,19 @@ This feature uses a stable architecture with Git submodules:
 
 ## 📝 Notes
 
--   **Legacy Feature**: Provided for backward compatibility with existing configurations
--   **AUR Packages**: Uses binary packages from AUR (dotnet-*-bin)
--   **Simplified**: Minimal options compared to the main dotnet feature
--   **Requires yay**: Must install yay feature first
--   **Latest Versions**: AUR binary packages typically provide latest .NET versions
--   **Global Tools Support**: Supports installation of Entity Framework CLI, ASP.NET Code Generator, and custom tools
+- **Legacy Feature**: Provided for backward compatibility with existing configurations
+- **AUR Packages**: Uses binary packages from AUR (dotnet-*-bin)
+- **Simplified**: Minimal options compared to the main dotnet feature
+- **Requires yay**: Must install yay feature first
+- **Latest Versions**: AUR binary packages typically provide latest .NET versions
+- **Global Tools Support**: Supports installation of Entity Framework CLI, ASP.NET Code Generator, and custom tools
 
 ## 📋 Requirements
 
--   Container must be running Arch Linux
--   yay AUR helper must be installed (via yay feature)
--   Internet connection for downloading packages from AUR
--   User must have appropriate permissions for package installation
+- Container must be running Arch Linux
+- yay AUR helper must be installed (via yay feature)
+- Internet connection for downloading packages from AUR
+- User must have appropriate permissions for package installation
 
 ## 🔄 Migration
 

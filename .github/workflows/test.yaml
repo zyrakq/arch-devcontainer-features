@@ -16,6 +16,7 @@ jobs:
           - yay
           - clone-repo
           - node
+          - rust
           - dotnet
           - dotnet-bin
         baseImage:
@@ -39,6 +40,7 @@ jobs:
           - yay
           - clone-repo
           - node
+          - rust
           - dotnet
           - dotnet-bin
     steps:

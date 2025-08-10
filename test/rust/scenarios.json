@@ -1,0 +1,65 @@
+{
+    "test": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "installClippy": true,
+                "installRustfmt": true
+            }
+        }
+    },
+    "test_nightly": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "rustVersion": "nightly"
+            }
+        }
+    },
+    "test_additional_targets": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "additionalTargets": "wasm32-unknown-unknown,x86_64-pc-windows-gnu"
+            }
+        }
+    },
+    "test_cargo_tools": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "globalCrates": "cargo-watch,cargo-audit"
+            }
+        }
+    },
+    "test_global_crates": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "globalCrates": "ripgrep,fd-find"
+            }
+        }
+    },
+    "test_minimal": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "installClippy": false,
+                "installRustfmt": false,
+                "globalCrates": ""
+            }
+        }
+    },
+    "test_full_setup": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "rustVersion": "stable",
+                "additionalTargets": "wasm32-unknown-unknown",
+                "installClippy": true,
+                "installRustfmt": true,
+                "globalCrates": "cargo-watch,cargo-audit,ripgrep,fd-find"
+            }
+        }
+    }
+}

@@ -5,6 +5,7 @@ A collection of DevContainer features for Arch Linux, providing stable and relia
 ## 🚀 Available Features
 
 ### 📦 [Yay AUR Helper](src/yay/README.md)
+
 Installs yay - a popular AUR helper for easy installation of packages from the Arch User Repository.
 
 ```json
@@ -18,6 +19,7 @@ Installs yay - a popular AUR helper for easy installation of packages from the A
 ```
 
 ### 📁 [Clone Repository](src/clone-repo/README.md)
+
 Automatically clones a Git repository into your devcontainer workspace during container creation.
 
 ```json
@@ -32,6 +34,7 @@ Automatically clones a Git repository into your devcontainer workspace during co
 ```
 
 ### 🟢 [Node.js and npm](src/node/README.md)
+
 Installs Node.js and npm with sudo-free configuration for Arch Linux DevContainers.
 
 ```json
@@ -45,7 +48,24 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 }
 ```
 
+### 🦀 [Rust and Cargo](src/rust/README.md)
+
+Installs Rust programming language, Cargo package manager, and development tools via rustup for Arch Linux.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+            "rustVersion": "stable",
+            "additionalTargets": "wasm32-unknown-unknown",
+            "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
+        }
+    }
+}
+```
+
 ### 🟣 [.NET SDK and Runtime](src/dotnet/README.md)
+
 Installs .NET SDK, runtime, and development tools from official Arch Linux packages.
 
 ```json
@@ -61,6 +81,7 @@ Installs .NET SDK, runtime, and development tools from official Arch Linux packa
 ```
 
 ### 🟣 [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md)
+
 Legacy feature that installs .NET SDK and runtime from AUR packages. ASP.NET Core Runtime is included automatically.
 
 ```json
@@ -80,12 +101,13 @@ Legacy feature that installs .NET SDK and runtime from AUR packages. ASP.NET Cor
 
 This project uses a Git submodules architecture for stability:
 
-```
+```sh
 arch-devcontainer-features/
 ├── src/                     # Our features
 │   ├── yay/
 │   ├── clone-repo/
 │   ├── node/
+│   ├── rust/
 │   ├── dotnet/
 │   └── dotnet-bin/
 └── vendor/                  # Dependencies
@@ -102,6 +124,7 @@ arch-devcontainer-features/
 - ✅ **Offline capability**: All necessary scripts available locally
 
 ## 🚀 Quick Start
+
 ### 🎯 Ready-to-use Solutions
 
 For quick start, you can use:
@@ -123,6 +146,10 @@ For quick start, you can use:
             "nodeVersion": "lts",
             "globalPackages": "typescript,nodemon"
         },
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+            "rustVersion": "stable",
+            "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
+        },
         "ghcr.io/zyrakq/arch-devcontainer-features/dotnet:1": {
             "dotnetVersion": "8.0",
             "installEntityFramework": true
@@ -132,7 +159,7 @@ For quick start, you can use:
             "targetDir": "/workspace"
         }
     },
-    "postCreateCommand": "node --version && npm --version && dotnet --version && echo 'DevContainer ready!'"
+    "postCreateCommand": "node --version && npm --version && rustc --version && cargo --version && dotnet --version && echo 'DevContainer ready!'"
 }
 ```
 
@@ -143,6 +170,7 @@ For quick start, you can use:
 All features in this repository install after `ghcr.io/bartventer/arch-devcontainer-features/common-utils` to ensure proper installation order and use scripts from the vendored `bartventer-features` submodule.
 
 **Important Notes:**
+
 - Features dynamically download scripts based on the current submodule commit hash
 - Script versions are only updated when the submodule is updated to a new commit/tag
 - Features will fallback to `main` branch if submodule commit is not found
@@ -171,6 +199,7 @@ git ls-tree HEAD vendor/bartventer-features
 ### Script URL Generation
 
 Features automatically generate URLs using the submodule commit hash:
+
 ```bash
 # Current submodule commit
 COMMIT=$(git ls-tree HEAD vendor/bartventer-features | awk '{print $3}')
@@ -181,7 +210,7 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 
 ### Project Structure
 
-```
+```sh
 ├── .devcontainer/           # DevContainer configuration for development
 ├── src/                     # DevContainer features
 │   ├── yay/                # Yay AUR helper feature
@@ -195,6 +224,12 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   ├── node/               # Node.js and npm feature
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
+│   │   └── README.md
+│   ├── rust/               # Rust and Cargo feature
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   ├── NOTES.md
+│   │   ├── examples.md
 │   │   └── README.md
 │   ├── dotnet/             # .NET SDK and runtime feature (official packages)
 │   │   ├── devcontainer-feature.json
@@ -214,14 +249,17 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 ## 📋 Compatibility
 
 ### Supported Architectures
+
 - `linux/amd64`
 - `linux/arm64`
 
 ### Supported Systems
+
 - **Primary**: Arch Linux
 - **Secondary**: Other Linux distributions (for clone-repo)
 
 ### Requirements
+
 - Docker or Podman
 - Visual Studio Code with Dev Containers extension
 - Git (for cloning features)
@@ -240,9 +278,11 @@ The project includes automated processes:
 ### Publication
 
 Features are automatically published to:
+
 - `ghcr.io/zyrakq/arch-devcontainer-features/yay`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
+- `ghcr.io/zyrakq/arch-devcontainer-features/rust`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin`
 
@@ -251,6 +291,7 @@ Features are automatically published to:
 - [Yay AUR Helper](src/yay/README.md) - Detailed yay feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
+- [Rust and Cargo](src/rust/README.md) - Rust feature documentation
 - [.NET SDK and Runtime](src/dotnet/README.md) - .NET feature documentation (official packages)
 - [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md) - .NET feature documentation (AUR packages)
 - [DevContainers Specification](https://containers.dev/implementors/features/) - Official specification
@@ -273,7 +314,10 @@ Features are automatically published to:
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is dual-licensed under:
+
+- [Apache License 2.0](LICENSE-APACHE)
+- [MIT License](LICENSE-MIT)
 
 ## 🙏 Acknowledgments
 

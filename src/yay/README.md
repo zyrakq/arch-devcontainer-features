@@ -104,6 +104,7 @@ If you encounter installation issues:
 - User must have appropriate permissions for package installation
 - Internet connection for downloading packages from AUR
 
+
 ---
 
 _Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/yay/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

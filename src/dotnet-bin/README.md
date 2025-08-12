@@ -281,6 +281,7 @@ For new projects, consider migrating to the main dotnet feature:
 
 This provides better integration with system libraries and faster installation.
 
+
 ---
 
 _Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/dotnet-bin/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

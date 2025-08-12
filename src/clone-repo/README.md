@@ -221,6 +221,7 @@ If you encounter cloning issues:
 - **For SSH repositories**: SSH keys must be available in the container
 - **No manual postCreateCommand needed**: Feature automatically handles execution via built-in lifecycle hook
 
+
 ---
 
 _Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/clone-repo/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

@@ -125,7 +125,7 @@ if [ -n "$INSTALL_PACKAGES" ]; then
     # Determine user to run yay as
     if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ] || [ "${USERNAME}" = "root" ]; then
         # If running as root or auto, find a non-root user or create one
-        POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+        POSSIBLE_USERS=("vscode" "abc" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
         YAY_USER=""
         for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
             if id -u "${CURRENT_USER}" >/dev/null 2>&1; then

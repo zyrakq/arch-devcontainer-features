@@ -1,6 +1,6 @@
 {
     "id": "rust",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Rust and Cargo",
     "description": "Installs Rust, Cargo, and development tools via rustup for Arch Linux",
     "installsAfter": [

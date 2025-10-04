@@ -1,6 +1,6 @@
 {
     "id": "dotnet",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": ".NET SDK and Runtime",
     "description": "Installs .NET SDK, runtime, and development tools from official Arch Linux packages",
     "installsAfter": [

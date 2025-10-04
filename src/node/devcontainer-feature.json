@@ -1,6 +1,6 @@
 {
     "id": "node",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Node.js, npm, Yarn, and pnpm",
     "description": "Installs Node.js, npm, and optionally Yarn and pnpm, with sudo-free configuration for Arch Linux",
     "installsAfter": [

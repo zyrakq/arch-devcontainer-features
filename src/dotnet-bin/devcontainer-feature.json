@@ -1,6 +1,6 @@
 {
     "id": "dotnet-bin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": ".NET SDK and Runtime (AUR)",
     "description": "Installs .NET SDK and runtime from AUR packages for Arch Linux",
     "installsAfter": [

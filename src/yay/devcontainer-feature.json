@@ -1,6 +1,6 @@
 {
     "id": "yay",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Yay AUR Helper",
     "description": "Installs yay AUR helper for Arch Linux",
     "installsAfter": [

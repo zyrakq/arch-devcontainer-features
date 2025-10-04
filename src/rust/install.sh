@@ -81,7 +81,7 @@ check_pacman
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
-    POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    POSSIBLE_USERS=("vscode" "abc" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
     for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
         if id -u "${CURRENT_USER}" >/dev/null 2>&1; then
             USERNAME=${CURRENT_USER}
@@ -121,11 +121,44 @@ echo "Starting Rust installation..."
 echo "Installing rustup and build dependencies via pacman..."
 check_and_install_packages rustup base-devel
 
+# Determine home directory and set Rust environment variables
+if [ "${USERNAME}" != "root" ]; then
+    USER_HOME=$(eval echo "~$USERNAME")
+else
+    USER_HOME="/root"
+fi
+
+# Create and set permissions for Rust directories
+RUSTUP_HOME="$USER_HOME/.rustup"
+CARGO_HOME="$USER_HOME/.cargo"
+
+# Ensure home directory exists with correct permissions
+if [ ! -d "$USER_HOME" ]; then
+    mkdir -p "$USER_HOME"
+fi
+
+# Create Rust directories with correct permissions
+mkdir -p "$RUSTUP_HOME" "$CARGO_HOME"
+
+# Set ownership if installing for non-root user
+if [ "${USERNAME}" != "root" ]; then
+    chown -R "${USERNAME}:${USERNAME}" "$USER_HOME"
+    chmod -R 755 "$USER_HOME"
+fi
+
+# Export environment variables
+export RUSTUP_HOME
+export CARGO_HOME
+
+echo "Rust directories created:"
+echo "  RUSTUP_HOME: $RUSTUP_HOME"
+echo "  CARGO_HOME: $CARGO_HOME"
+
 # Initialize rustup for the user
 echo "Initializing rustup..."
 if [ "${USERNAME}" != "root" ]; then
-    # Initialize rustup for non-root user
-    run_as_user "rustup default $RUST_VERSION"
+    # Initialize rustup for non-root user with explicit environment
+    run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup default $RUST_VERSION"
 else
     # Initialize rustup for root
     rustup default "$RUST_VERSION"
@@ -137,7 +170,7 @@ echo "Rust $RUST_VERSION toolchain installed successfully!"
 if [ "$INSTALL_CLIPPY" = "true" ]; then
     echo "Installing clippy..."
     if [ "${USERNAME}" != "root" ]; then
-        run_as_user "rustup component add clippy"
+        run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup component add clippy"
     else
         rustup component add clippy
     fi
@@ -147,7 +180,7 @@ fi
 if [ "$INSTALL_RUSTFMT" = "true" ]; then
     echo "Installing rustfmt..."
     if [ "${USERNAME}" != "root" ]; then
-        run_as_user "rustup component add rustfmt"
+        run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup component add rustfmt"
     else
         rustup component add rustfmt
     fi
@@ -164,7 +197,7 @@ if [ -n "$ADDITIONAL_TARGETS" ]; then
     for target in $TARGETS; do
         echo "Installing target: $target"
         if [ "${USERNAME}" != "root" ]; then
-            run_as_user "rustup target add $target"
+            run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup target add $target"
         else
             rustup target add "$target"
         fi
@@ -183,7 +216,7 @@ if [ -n "$GLOBAL_CRATES" ]; then
     for crate in $CRATES; do
         echo "Installing crate: $crate"
         if [ "${USERNAME}" != "root" ]; then
-            run_as_user "cargo install $crate"
+            run_as_user "export CARGO_HOME='$CARGO_HOME' && cargo install $crate"
         else
             cargo install "$crate"
         fi

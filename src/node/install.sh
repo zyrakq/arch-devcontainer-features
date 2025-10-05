@@ -185,8 +185,17 @@ if [ "$CONFIGURE_NPM_PREFIX" = "true" ]; then
         USER_HOME=$(eval echo "~$USERNAME")
         NPM_GLOBAL_DIR="$USER_HOME/.npm-global"
         
-        # Create npm global directory
-        run_as_user "mkdir -p \"$NPM_GLOBAL_DIR\""
+        # Ensure home directory exists with correct permissions
+        if [ ! -d "$USER_HOME" ]; then
+            mkdir -p "$USER_HOME"
+        fi
+        
+        # Create npm global directory with correct permissions
+        mkdir -p "$NPM_GLOBAL_DIR"
+        
+        # Set ownership if installing for non-root user
+        chown -R "${USERNAME}:${USERNAME}" "$USER_HOME"
+        chmod -R 755 "$USER_HOME"
         
         # Configure npm prefix
         run_as_user "npm config set prefix \"$NPM_GLOBAL_DIR\""

@@ -1,6 +1,6 @@
 {
     "id": "node",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "Node.js, npm, Yarn, and pnpm",
     "description": "Installs Node.js, npm, and optionally Yarn and pnpm, with sudo-free configuration for Arch Linux",
     "installsAfter": [
@@ -14,7 +14,10 @@
         },
         "installMethod": {
             "type": "string",
-            "enum": ["pacman", "nvm"],
+            "enum": [
+                "pacman",
+                "nvm"
+            ],
             "default": "pacman",
             "description": "Installation method: pacman or nvm"
         },

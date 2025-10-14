@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #-----------------------------------------------------------------------------------------------------------------
 # Copyright (c) Zyrakq.
-# Licensed under the MIT License.
+# Licensed under the MIT License or Apache License 2.0.
 #-----------------------------------------------------------------------------------------------------------------
 #
 # Docs: https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/dotnet/README.md

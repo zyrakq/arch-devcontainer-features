@@ -1,0 +1,25 @@
+{
+    "id": "chaotic-aur",
+    "version": "1.0.0",
+    "name": "Chaotic-AUR Repository",
+    "description": "Installs and configures Chaotic-AUR repository for pre-built AUR packages on Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "options": {
+        "mirror": {
+            "type": "string",
+            "enum": [
+                "auto",
+                "cdn"
+            ],
+            "default": "auto",
+            "description": "Mirror to use for Chaotic-AUR (auto = geo-mirror, cdn = CDN)"
+        },
+        "installPackages": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of packages to install from Chaotic-AUR after setup"
+        }
+    }
+}

@@ -18,6 +18,21 @@ Installs yay - a popular AUR helper for easy installation of packages from the A
 }
 ```
 
+### 🎨 [Chaotic-AUR Repository](src/chaotic-aur/README.md)
+
+Configures Chaotic-AUR repository for fast installation of pre-built AUR packages without compilation.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur:1": {
+            "mirror": "auto",
+            "installPackages": "visual-studio-code-bin,discord"
+        }
+    }
+}
+```
+
 ### 📁 [Clone Repository](src/clone-repo/README.md)
 
 Automatically clones a Git repository into your devcontainer workspace during container creation.
@@ -217,6 +232,11 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   └── README.md
+│   ├── chaotic-aur/        # Chaotic-AUR repository feature
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   ├── NOTES.md
+│   │   └── README.md
 │   ├── clone-repo/         # Clone repository feature
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
@@ -280,6 +300,7 @@ The project includes automated processes:
 Features are automatically published to:
 
 - `ghcr.io/zyrakq/arch-devcontainer-features/yay`
+- `ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
 - `ghcr.io/zyrakq/arch-devcontainer-features/rust`
@@ -289,6 +310,7 @@ Features are automatically published to:
 ## 📖 Documentation
 
 - [Yay AUR Helper](src/yay/README.md) - Detailed yay feature documentation
+- [Chaotic-AUR Repository](src/chaotic-aur/README.md) - Chaotic-AUR feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
 - [Rust and Cargo](src/rust/README.md) - Rust feature documentation

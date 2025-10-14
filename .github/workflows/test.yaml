@@ -19,6 +19,7 @@ jobs:
           - rust
           - dotnet
           - dotnet-bin
+          - chaotic-aur
         baseImage:
           - archlinux:latest
         # No exclusions needed - all features work on archlinux:latest

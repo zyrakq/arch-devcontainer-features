@@ -36,7 +36,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             if [ "${{ inputs.force_all }}" = "true" ]; then
               # Test all features
-              FEATURES='["yay","clone-repo","node","rust","dotnet","dotnet-bin"]'
+              FEATURES='["yay","clone-repo","node","rust","dotnet","dotnet-bin","chaotic-aur"]'
               echo "Manual dispatch: Testing all features"
             elif [ -n "${{ inputs.features }}" ]; then
               # Test specified features

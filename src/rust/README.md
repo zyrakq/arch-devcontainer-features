@@ -266,6 +266,7 @@ echo $PATH | grep cargo
 - Verify compatibility with latest DevContainer specifications
 - Validate cross-compilation targets with new releases
 
+
 ---
 
 _Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/rust/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

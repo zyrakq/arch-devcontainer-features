@@ -107,8 +107,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
     "features": {
         "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
             "rustVersion": "stable",
-            "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand",
-            "globalCrates": "serde,tokio,clap,reqwest"
+            "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand"
         }
     }
 }
@@ -266,7 +265,6 @@ echo $PATH | grep cargo
 - Test with new Rust versions before updating defaults
 - Verify compatibility with latest DevContainer specifications
 - Validate cross-compilation targets with new releases
-
 
 ---
 

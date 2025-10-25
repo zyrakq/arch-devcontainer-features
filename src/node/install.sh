@@ -166,9 +166,10 @@ fi
 if [ "$INSTALL_METHOD" = "pacman" ]; then
     echo "Installing Node.js via pacman..."
     
-    # Check if Node.js is already installed
-    if command -v node &> /dev/null; then
+    # Check if both Node.js and npm are already installed
+    if command -v node &> /dev/null && command -v npm &> /dev/null; then
         echo "Node.js is already installed: $(node --version)"
+        echo "npm is already installed: $(npm --version)"
     else
         echo "Installing Node.js and npm packages..."
         check_and_install_packages nodejs npm
@@ -226,7 +227,9 @@ fi
 if [ "$INSTALL_YARN" = "true" ]; then
     echo "Installing Yarn..."
     if [ "${USERNAME}" != "root" ] && [ "$CONFIGURE_NPM_PREFIX" = "true" ]; then
-        run_as_user "npm install -g yarn"
+        USER_HOME=$(eval echo "~$USERNAME")
+        NPM_GLOBAL_DIR="$USER_HOME/.npm-global"
+        run_as_user "export PATH=\"$NPM_GLOBAL_DIR/bin:\$PATH\" && export NPM_CONFIG_PREFIX=\"$NPM_GLOBAL_DIR\" && npm install -g yarn"
     else
         sudo_if "npm install -g yarn"
     fi
@@ -236,7 +239,9 @@ fi
 if [ "$INSTALL_PNPM" = "true" ]; then
     echo "Installing pnpm..."
     if [ "${USERNAME}" != "root" ] && [ "$CONFIGURE_NPM_PREFIX" = "true" ]; then
-        run_as_user "npm install -g pnpm"
+        USER_HOME=$(eval echo "~$USERNAME")
+        NPM_GLOBAL_DIR="$USER_HOME/.npm-global"
+        run_as_user "export PATH=\"$NPM_GLOBAL_DIR/bin:\$PATH\" && export NPM_CONFIG_PREFIX=\"$NPM_GLOBAL_DIR\" && npm install -g pnpm"
     else
         sudo_if "npm install -g pnpm"
     fi
@@ -284,10 +289,34 @@ if command -v npm &> /dev/null; then
         echo "Global packages can be installed without sudo: npm install -g <package>"
     fi
 fi
-if [ "$INSTALL_YARN" = "true" ] && command -v yarn &> /dev/null; then
-    echo "Yarn version: $(yarn --version)"
+if [ "$INSTALL_YARN" = "true" ]; then
+    if [ "${USERNAME}" != "root" ] && [ "$CONFIGURE_NPM_PREFIX" = "true" ]; then
+        USER_HOME=$(eval echo "~$USERNAME")
+        NPM_GLOBAL_DIR="$USER_HOME/.npm-global"
+        if PATH="$NPM_GLOBAL_DIR/bin:$PATH" command -v yarn &> /dev/null; then
+            echo "Yarn version: $(PATH="$NPM_GLOBAL_DIR/bin:$PATH" yarn --version)"
+        else
+            echo "⚠️  Yarn installed but not in current PATH. Reload shell: source ~/.bashrc"
+        fi
+    elif command -v yarn &> /dev/null; then
+        echo "Yarn version: $(yarn --version)"
+    else
+        echo "⚠️  Yarn installation may require shell reload"
+    fi
 fi
-if [ "$INSTALL_PNPM" = "true" ] && command -v pnpm &> /dev/null; then
-    echo "pnpm version: $(pnpm --version)"
+if [ "$INSTALL_PNPM" = "true" ]; then
+    if [ "${USERNAME}" != "root" ] && [ "$CONFIGURE_NPM_PREFIX" = "true" ]; then
+        USER_HOME=$(eval echo "~$USERNAME")
+        NPM_GLOBAL_DIR="$USER_HOME/.npm-global"
+        if PATH="$NPM_GLOBAL_DIR/bin:$PATH" command -v pnpm &> /dev/null; then
+            echo "pnpm version: $(PATH="$NPM_GLOBAL_DIR/bin:$PATH" pnpm --version)"
+        else
+            echo "⚠️  pnpm installed but not in current PATH. Reload shell: source ~/.bashrc"
+        fi
+    elif command -v pnpm &> /dev/null; then
+        echo "pnpm version: $(pnpm --version)"
+    else
+        echo "⚠️  pnpm installation may require shell reload"
+    fi
 fi
 echo "=========================="

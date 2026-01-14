@@ -30,9 +30,6 @@
         "ghcr.io/zyrakq/arch-devcontainer-features/node:1": {
             "globalPackages": "@devcontainers/cli"
         },
-        "ghcr.io/zyrakq/arch-devcontainer-features/yay:1": {
-            "installPackages": "act-bin"
-        },
         "ghcr.io/zyrakq/arch-devcontainer-features/clone-repo:1": {
             "repoUrl": "git@github.com:zyrakq/arch-devcontainer-features.git",
             "targetDir": "/workspace/arch-devcontainer-features"

@@ -63,15 +63,16 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 }
 ```
 
-### 🦀 [Rust and Cargo](src/rust/README.md)
+### 🦀 [Rust and Cargo (rustup)](src/rust-bin/README.md)
 
 Installs Rust programming language, Cargo package manager, and development tools via rustup for Arch Linux.
 
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
+            "rustupProfile": "minimal",
             "additionalTargets": "wasm32-unknown-unknown",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
         }
@@ -161,7 +162,7 @@ For quick start, you can use:
             "nodeVersion": "lts",
             "globalPackages": "typescript,nodemon"
         },
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
         },
@@ -245,7 +246,7 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   └── README.md
-│   ├── rust/               # Rust and Cargo feature
+│   ├── rust-bin/           # Rust and Cargo feature (rustup)
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   ├── NOTES.md
@@ -303,7 +304,7 @@ Features are automatically published to:
 - `ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
-- `ghcr.io/zyrakq/arch-devcontainer-features/rust`
+- `ghcr.io/zyrakq/arch-devcontainer-features/rust-bin`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin`
 
@@ -313,7 +314,7 @@ Features are automatically published to:
 - [Chaotic-AUR Repository](src/chaotic-aur/README.md) - Chaotic-AUR feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
-- [Rust and Cargo](src/rust/README.md) - Rust feature documentation
+- [Rust and Cargo (rustup)](src/rust-bin/README.md) - Rust feature documentation
 - [.NET SDK and Runtime](src/dotnet/README.md) - .NET feature documentation (official packages)
 - [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md) - .NET feature documentation (AUR packages)
 - [DevContainers Specification](https://containers.dev/implementors/features/) - Official specification

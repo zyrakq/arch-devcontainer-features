@@ -16,7 +16,7 @@ jobs:
           - yay
           - clone-repo
           - node
-          - rust
+          - rust-bin
           - dotnet
           - dotnet-bin
           - chaotic-aur
@@ -41,7 +41,7 @@ jobs:
           - yay
           - clone-repo
           - node
-          - rust
+          - rust-bin
           - dotnet
           - dotnet-bin
     steps:

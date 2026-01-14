@@ -4,12 +4,35 @@ This document provides practical examples of how to configure the Rust feature f
 
 ## 📋 Basic Configurations
 
+### 0. Fast Installation with Minimal Profile
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
+            "rustupProfile": "minimal"
+        }
+    }
+}
+```
+
+**What you get:**
+
+- Rust stable toolchain
+- Clippy linter  
+- Rustfmt formatter
+- Faster installation (2-3x) without docs and sources
+
+**Use case:** Quick setup when you don't need local documentation.
+
+---
+
 ### 1. Default Setup (Recommended for most projects)
 
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {}
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {}
     }
 }
 ```
@@ -26,7 +49,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
         }
     }
@@ -42,7 +65,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "additionalTargets": "wasm32-unknown-unknown,wasm32-wasi",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,wasm-pack,cargo-generate,wasm-bindgen-cli"
         }
@@ -57,7 +80,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "additionalTargets": "wasm32-unknown-unknown",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,trunk,wasm-pack,leptos-cli,dioxus-cli"
         }
@@ -74,7 +97,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "additionalTargets": "thumbv7em-none-eabihf,thumbv6m-none-eabi,riscv32imc-unknown-none-elf",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-binutils,probe-run,cargo-embed,cargo-flash"
@@ -90,7 +113,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "additionalTargets": "x86_64-pc-windows-gnu,aarch64-unknown-linux-gnu,x86_64-apple-darwin",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cross"
         }
@@ -107,7 +130,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "nightly",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,cargo-miri,cargo-fuzz,cargo-asm"
         }
@@ -122,7 +145,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,cargo-asm,cargo-criterion,cargo-bench,flamegraph,perf"
         }
     }
@@ -138,7 +161,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-deny,cargo-geiger,cargo-crev"
         }
     }
@@ -152,7 +175,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-fuzz,honggfuzz,afl"
         }
     }
@@ -168,7 +191,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,cargo-play,cargo-show-asm,evcxr_jupyter"
         }
     }
@@ -182,7 +205,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-generate,mdbook"
         }
     }
@@ -198,7 +221,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-generate"
         }
     }
@@ -214,7 +237,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,evcxr_jupyter"
         }
     }
@@ -228,7 +251,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "additionalTargets": "wasm32-unknown-unknown",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand,cargo-contract,subxt-cli"
         }
@@ -245,7 +268,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-dist,cargo-release"
         }
     }
@@ -259,7 +282,7 @@ This document provides practical examples of how to configure the Rust feature f
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-nextest,cargo-tarpaulin,cargo-llvm-cov"
         }
     }

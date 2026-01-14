@@ -1,8 +1,8 @@
 {
-    "id": "rust",
-    "version": "1.0.1",
-    "name": "Rust and Cargo",
-    "description": "Installs Rust, Cargo, and development tools via rustup for Arch Linux",
+    "id": "rust-bin",
+    "version": "1.0.2",
+    "name": "Rust and Cargo (rustup)",
+    "description": "Installs Rust, Cargo, and development tools via rustup with flexible toolchain management for Arch Linux",
     "installsAfter": [
         "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
     ],
@@ -31,6 +31,15 @@
             "type": "boolean",
             "default": true,
             "description": "Install rustfmt code formatter"
+        },
+        "rustupProfile": {
+            "type": "string",
+            "enum": [
+                "default",
+                "minimal"
+            ],
+            "default": "default",
+            "description": "Rustup installation profile (minimal = faster installation without docs/sources, default = complete toolchain)"
         },
         "globalCrates": {
             "type": "string",

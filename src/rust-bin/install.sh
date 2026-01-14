@@ -4,13 +4,14 @@
 # Licensed under the MIT License or Apache License 2.0.
 #-----------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/rust/README.md
+# Docs: https://github.com/zyrakq/arch-devcontainer-features/tree/master/src/rust-bin/README.md
 # Maintainer: Zyrakq
 
 set -e
 
 # shellcheck disable=SC2034
 RUST_VERSION="${RUSTVERSION:-"stable"}"
+RUSTUP_PROFILE="${RUSTUPPROFILE:-"default"}"
 ADDITIONAL_TARGETS="${ADDITIONALTARGETS:-""}"
 INSTALL_CLIPPY="${INSTALLCLIPPY:-"true"}"
 INSTALL_RUSTFMT="${INSTALLRUSTFMT:-"true"}"
@@ -155,13 +156,24 @@ echo "  RUSTUP_HOME: $RUSTUP_HOME"
 echo "  CARGO_HOME: $CARGO_HOME"
 
 # Initialize rustup for the user
-echo "Initializing rustup..."
-if [ "${USERNAME}" != "root" ]; then
-    # Initialize rustup for non-root user with explicit environment
-    run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup default $RUST_VERSION"
+echo "Initializing rustup with profile: $RUSTUP_PROFILE..."
+
+if [ "$RUSTUP_PROFILE" = "minimal" ]; then
+    echo "Using minimal profile for faster installation (without docs and sources)"
+    if [ "${USERNAME}" != "root" ]; then
+        run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup set profile minimal && rustup toolchain install $RUST_VERSION && rustup default $RUST_VERSION"
+    else
+        rustup set profile minimal
+        rustup toolchain install "$RUST_VERSION"
+        rustup default "$RUST_VERSION"
+    fi
 else
-    # Initialize rustup for root
-    rustup default "$RUST_VERSION"
+    echo "Using default profile (complete toolchain with docs and sources)"
+    if [ "${USERNAME}" != "root" ]; then
+        run_as_user "export RUSTUP_HOME='$RUSTUP_HOME' CARGO_HOME='$CARGO_HOME' && rustup default $RUST_VERSION"
+    else
+        rustup default "$RUST_VERSION"
+    fi
 fi
 
 echo "Rust $RUST_VERSION toolchain installed successfully!"
@@ -258,6 +270,7 @@ if command -v cargo &> /dev/null; then
 fi
 if command -v rustup &> /dev/null; then
     echo "Rustup version: $(rustup --version)"
+    echo "Rustup profile: $RUSTUP_PROFILE"
 fi
 if [ "$INSTALL_CLIPPY" = "true" ] && command -v cargo-clippy &> /dev/null; then
     echo "Clippy: Available"

@@ -1,3 +1,26 @@
+
+# Rust and Cargo (rust)
+
+Installs Rust, Cargo, and development tools via rustup for Arch Linux
+
+## Example Usage
+
+```json
+"features": {
+    "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {}
+}
+```
+
+## Options
+
+| Options Id | Description | Type | Default Value |
+|-----|-----|-----|-----|
+| rustVersion | Rust toolchain version to install | string | stable |
+| additionalTargets | Comma-separated list of additional compilation targets (e.g., 'wasm32-unknown-unknown,x86_64-pc-windows-gnu') | string | - |
+| installClippy | Install clippy linter | boolean | true |
+| installRustfmt | Install rustfmt code formatter | boolean | true |
+| globalCrates | Comma-separated list of crates to install globally via cargo install | string | - |
+
 # 🦀 Rust
 
 ## 📝 Description
@@ -11,7 +34,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {}
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {}
     }
 }
 ```
@@ -21,7 +44,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "installClippy": true,
             "installRustfmt": true,
@@ -39,7 +62,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "nightly",
             "additionalTargets": "wasm32-unknown-unknown,wasm32-wasi",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,wasm-pack,cargo-generate"
@@ -53,7 +76,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "additionalTargets": "x86_64-pc-windows-gnu,aarch64-unknown-linux-gnu",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cross"
@@ -67,7 +90,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "installClippy": false,
             "installRustfmt": false,
@@ -82,7 +105,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ```json
 {
     "features": {
-        "ghcr.io/zyrakq/arch-devcontainer-features/rust:1": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
             "rustVersion": "stable",
             "globalCrates": "cargo-watch,cargo-edit,cargo-audit,cargo-expand"
         }
@@ -242,3 +265,8 @@ echo $PATH | grep cargo
 - Test with new Rust versions before updating defaults
 - Verify compatibility with latest DevContainer specifications
 - Validate cross-compilation targets with new releases
+
+
+---
+
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/rust/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

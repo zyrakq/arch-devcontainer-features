@@ -63,6 +63,21 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 }
 ```
 
+### 🚀 [Bun Runtime](src/bun/README.md)
+
+Installs Bun - fast all-in-one JavaScript runtime and toolkit for Arch Linux with smart fallback installation methods.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/bun:1": {
+            "installMethod": "pacman",
+            "globalPackages": "typescript,esbuild"
+        }
+    }
+}
+```
+
 ### 🦀 [Rust and Cargo (Pre-compiled)](src/rust/README.md)
 
 Installs Rust programming language and Cargo package manager from pre-compiled packages for fast installation (10-60 seconds). Includes clippy, rustfmt, rust-src, and rust-analyzer.
@@ -144,6 +159,7 @@ arch-devcontainer-features/
 │   ├── chaotic-aur/
 │   ├── clone-repo/
 │   ├── node/
+│   ├── bun/
 │   ├── rust/               # Rust and Cargo feature (pre-compiled)
 │   ├── rust-bin/           # Rust and Cargo feature (rustup)
 │   ├── dotnet/
@@ -267,6 +283,12 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   ├── node/               # Node.js and npm feature
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
+│   │   ├── NOTES.md
+│   │   └── README.md
+│   ├── bun/                # Bun runtime feature
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   ├── NOTES.md
 │   │   └── README.md
 │   ├── rust/               # Rust and Cargo feature (pre-compiled)
 │   │   ├── devcontainer-feature.json
@@ -332,6 +354,7 @@ Features are automatically published to:
 - `ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
+- `ghcr.io/zyrakq/arch-devcontainer-features/bun`
 - `ghcr.io/zyrakq/arch-devcontainer-features/rust`
 - `ghcr.io/zyrakq/arch-devcontainer-features/rust-bin`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet`
@@ -343,6 +366,7 @@ Features are automatically published to:
 - [Chaotic-AUR Repository](src/chaotic-aur/README.md) - Chaotic-AUR feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
+- [Bun Runtime](src/bun/README.md) - Bun runtime feature documentation
 - [Rust and Cargo (pre-compiled)](src/rust/README.md) - Rust feature documentation (pre-compiled packages)
 - [Rust and Cargo (rustup)](src/rust-bin/README.md) - Rust feature documentation (rustup)
 - [.NET SDK and Runtime](src/dotnet/README.md) - .NET feature documentation (official packages)

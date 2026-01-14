@@ -1,0 +1,59 @@
+{
+    "test": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {}
+        }
+    },
+    "test_with_packages": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {
+                "globalPackages": "typescript,esbuild"
+            }
+        }
+    },
+    "test_yay_install": {
+        "image": "archlinux:latest",
+        "features": {
+            "yay": {},
+            "bun": {
+                "installMethod": "yay"
+            }
+        }
+    },
+    "test_official_install": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {
+                "installMethod": "official"
+            }
+        }
+    },
+    "test_fallback": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {
+                "installMethod": "yay",
+                "strictInstall": false
+            }
+        }
+    },
+    "test_node_compat": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {
+                "installNodeCompat": true
+            }
+        }
+    },
+    "test_specific_version": {
+        "image": "archlinux:latest",
+        "features": {
+            "bun": {
+                "installMethod": "official",
+                "version": "1.0.21"
+            }
+        }
+    }
+}

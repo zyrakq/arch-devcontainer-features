@@ -36,7 +36,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             if [ "${{ inputs.force_all }}" = "true" ]; then
               # Test all features
-              FEATURES='["yay","clone-repo","node","rust","rust-bin","dotnet","dotnet-bin","chaotic-aur"]'
+              FEATURES='["yay","clone-repo","node","bun","rust","rust-bin","dotnet","dotnet-bin","chaotic-aur"]'
               echo "Manual dispatch: Testing all features"
             elif [ -n "${{ inputs.features }}" ]; then
               # Test specified features
@@ -68,6 +68,13 @@ jobs:
             # If dotnet-bin is changed, also include yay (dependency)
             if echo "$FEATURES" | jq -r '.[]' | grep -q "dotnet-bin"; then
               echo "dotnet-bin detected, adding yay dependency"
+              FEATURES=$(echo "$FEATURES" | jq '. + ["yay"] | unique')
+            fi
+            
+            # If bun is changed and uses yay method, include yay (optional dependency)
+            # Note: bun has fallback logic, but we include yay for comprehensive testing
+            if echo "$FEATURES" | jq -r '.[]' | grep -q "bun"; then
+              echo "bun detected, adding yay dependency for comprehensive testing"
               FEATURES=$(echo "$FEATURES" | jq '. + ["yay"] | unique')
             fi
             

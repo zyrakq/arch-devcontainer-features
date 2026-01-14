@@ -1,0 +1,42 @@
+{
+    "id": "bun",
+    "version": "1.0.0",
+    "name": "Bun Runtime",
+    "description": "Installs Bun - fast all-in-one JavaScript runtime and toolkit for Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils",
+        "ghcr.io/zyrakq/arch-devcontainer-features/yay"
+    ],
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "latest",
+            "description": "Bun version to install (latest, canary, or specific version like 1.0.21) - only works with official install method"
+        },
+        "installMethod": {
+            "type": "string",
+            "enum": [
+                "pacman",
+                "yay",
+                "official"
+            ],
+            "default": "pacman",
+            "description": "Installation method: pacman (default), yay, or official script"
+        },
+        "strictInstall": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, fail on unavailable method. If false, fallback to next available method"
+        },
+        "globalPackages": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of packages to install globally via bun"
+        },
+        "installNodeCompat": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install Node.js compatibility shims (node, npm, npx commands pointing to bun)"
+        }
+    }
+}

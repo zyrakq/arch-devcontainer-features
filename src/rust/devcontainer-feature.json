@@ -1,0 +1,26 @@
+{
+    "id": "rust",
+    "version": "2.0.0",
+    "name": "Rust and Cargo",
+    "description": "Installs Rust, Cargo, and development tools from pre-compiled packages for fast installation on Arch Linux",
+    "installsAfter": [
+        "ghcr.io/bartventer/arch-devcontainer-features/common-utils"
+    ],
+    "options": {
+        "installRustSrc": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Rust source code (for IDE support and rust-analyzer)"
+        },
+        "installRustAnalyzer": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install rust-analyzer LSP server (for IDE integration)"
+        },
+        "globalCrates": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated list of crates to install globally via cargo install"
+        }
+    }
+}

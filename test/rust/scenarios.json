@@ -1,0 +1,25 @@
+{
+    "test": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {}
+        }
+    },
+    "test_minimal": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "installRustSrc": false,
+                "installRustAnalyzer": false
+            }
+        }
+    },
+    "test_with_crates": {
+        "image": "archlinux:latest",
+        "features": {
+            "rust": {
+                "globalCrates": "cargo-watch,cargo-edit"
+            }
+        }
+    }
+}

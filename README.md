@@ -63,9 +63,27 @@ Installs Node.js and npm with sudo-free configuration for Arch Linux DevContaine
 }
 ```
 
-### 🦀 [Rust and Cargo (rustup)](src/rust-bin/README.md)
+### 🦀 [Rust and Cargo (Pre-compiled)](src/rust/README.md)
 
-Installs Rust programming language, Cargo package manager, and development tools via rustup for Arch Linux.
+Installs Rust programming language and Cargo package manager from pre-compiled packages for fast installation (10-60 seconds). Includes clippy, rustfmt, rust-src, and rust-analyzer.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust:2": {
+            "globalCrates": "cargo-watch,cargo-edit,cargo-audit"
+        }
+    }
+}
+```
+
+**Use this when:** You need stable Rust with fast installation for standard development.
+
+**Note:** clippy and rustfmt are always included and cannot be disabled.
+
+### 🦀 [Rust and Cargo (Rustup)](src/rust-bin/README.md)
+
+Installs Rust programming language, Cargo package manager, and development tools via rustup for Arch Linux. Provides beta/nightly toolchains and additional compilation targets.
 
 ```json
 {
@@ -79,6 +97,8 @@ Installs Rust programming language, Cargo package manager, and development tools
     }
 }
 ```
+
+**Use this when:** You need beta/nightly toolchains, multiple toolchain management, or additional compilation targets.
 
 ### 🟣 [.NET SDK and Runtime](src/dotnet/README.md)
 
@@ -121,9 +141,11 @@ This project uses a Git submodules architecture for stability:
 arch-devcontainer-features/
 ├── src/                     # Our features
 │   ├── yay/
+│   ├── chaotic-aur/
 │   ├── clone-repo/
 │   ├── node/
-│   ├── rust/
+│   ├── rust/               # Rust and Cargo feature (pre-compiled)
+│   ├── rust-bin/           # Rust and Cargo feature (rustup)
 │   ├── dotnet/
 │   └── dotnet-bin/
 └── vendor/                  # Dependencies
@@ -246,6 +268,12 @@ URL="https://raw.githubusercontent.com/bartventer/arch-devcontainer-features/${C
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
 │   │   └── README.md
+│   ├── rust/               # Rust and Cargo feature (pre-compiled)
+│   │   ├── devcontainer-feature.json
+│   │   ├── install.sh
+│   │   ├── NOTES.md
+│   │   ├── examples.md
+│   │   └── README.md
 │   ├── rust-bin/           # Rust and Cargo feature (rustup)
 │   │   ├── devcontainer-feature.json
 │   │   ├── install.sh
@@ -304,6 +332,7 @@ Features are automatically published to:
 - `ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
 - `ghcr.io/zyrakq/arch-devcontainer-features/node`
+- `ghcr.io/zyrakq/arch-devcontainer-features/rust`
 - `ghcr.io/zyrakq/arch-devcontainer-features/rust-bin`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet`
 - `ghcr.io/zyrakq/arch-devcontainer-features/dotnet-bin`
@@ -314,7 +343,8 @@ Features are automatically published to:
 - [Chaotic-AUR Repository](src/chaotic-aur/README.md) - Chaotic-AUR feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
 - [Node.js and npm](src/node/README.md) - Node.js feature documentation
-- [Rust and Cargo (rustup)](src/rust-bin/README.md) - Rust feature documentation
+- [Rust and Cargo (pre-compiled)](src/rust/README.md) - Rust feature documentation (pre-compiled packages)
+- [Rust and Cargo (rustup)](src/rust-bin/README.md) - Rust feature documentation (rustup)
 - [.NET SDK and Runtime](src/dotnet/README.md) - .NET feature documentation (official packages)
 - [.NET SDK and Runtime (AUR)](src/dotnet-bin/README.md) - .NET feature documentation (AUR packages)
 - [DevContainers Specification](https://containers.dev/implementors/features/) - Official specification

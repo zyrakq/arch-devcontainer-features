@@ -16,6 +16,7 @@ jobs:
           - yay
           - clone-repo
           - node
+          - rust
           - rust-bin
           - dotnet
           - dotnet-bin
@@ -41,6 +42,7 @@ jobs:
           - yay
           - clone-repo
           - node
+          - rust
           - rust-bin
           - dotnet
           - dotnet-bin

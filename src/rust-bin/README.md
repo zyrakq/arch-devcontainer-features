@@ -1,7 +1,7 @@
 
-# Rust and Cargo (rust)
+# Rust and Cargo (rustup) (rust-bin)
 
-Installs Rust, Cargo, and development tools via rustup for Arch Linux
+Installs Rust, Cargo, and development tools via rustup with flexible toolchain management for Arch Linux
 
 ## Example Usage
 
@@ -19,15 +19,52 @@ Installs Rust, Cargo, and development tools via rustup for Arch Linux
 | additionalTargets | Comma-separated list of additional compilation targets (e.g., 'wasm32-unknown-unknown,x86_64-pc-windows-gnu') | string | - |
 | installClippy | Install clippy linter | boolean | true |
 | installRustfmt | Install rustfmt code formatter | boolean | true |
+| rustupProfile | Rustup installation profile (minimal = faster installation without docs/sources, default = complete toolchain) | string | default |
 | globalCrates | Comma-separated list of crates to install globally via cargo install | string | - |
 
-# 🦀 Rust
+# 🦀 Rust (via rustup)
 
 ## 📝 Description
 
 This feature installs Rust programming language, Cargo package manager, and essential development tools via rustup on Arch Linux. It provides a complete Rust development environment with configurable toolchains, components, and additional tools.
 
+## 🤔 When to Use This Feature
+
+Use **`rust-bin`** (this feature) when you need:
+
+- ✅ **Beta or Nightly toolchains** - rustup provides easy access to all channels
+- ✅ **Multiple toolchains** - switch between stable/beta/nightly  
+- ✅ **Advanced rustup features** - profiles, components, custom toolchains
+- ✅ **Flexible version management** - pin exact Rust versions
+
+Use **`rust`** (pre-compiled) instead when you need:
+
+- ⚡ **Fast installation** - 10-60 seconds vs 10-60+ minutes
+- ⚡ **Stable Rust only** - standard development workflow
+- ⚡ **CI/CD environments** - where build time matters
+
+## ⚠️ Performance Note
+
+Initial installation may take **10-60+ minutes** as rustup compiles the toolchain. For faster installation with pre-compiled binaries, consider using the `rust` feature instead.
+
+**Tip**: Use `rustupProfile: "minimal"` option to reduce installation time by 2-3x (skips docs and sources).
+
 ## 🚀 Quick Start
+
+### Fast Installation (Minimal Profile)
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/rust-bin:1": {
+            "rustVersion": "stable",
+            "rustupProfile": "minimal"
+        }
+    }
+}
+```
+
+**Benefits**: 2-3x faster installation, suitable when you don't need documentation or sources.
 
 ### Basic Installation (Stable Rust)
 
@@ -118,6 +155,7 @@ This feature installs Rust programming language, Cargo package manager, and esse
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `rustVersion` | string | `"stable"` | Rust toolchain version (`stable`, `beta`, `nightly`) |
+| `rustupProfile` | string | `"default"` | Rustup profile (`minimal` - faster without docs, `default` - complete) |
 | `additionalTargets` | string | `""` | Comma-separated list of compilation targets |
 | `installClippy` | boolean | `true` | Install clippy linter |
 | `installRustfmt` | boolean | `true` | Install rustfmt code formatter |
@@ -144,9 +182,14 @@ This feature installs Rust programming language, Cargo package manager, and esse
 ### 📦 Installation Method
 
 1. **rustup via pacman** - Install rustup package manager through Arch Linux package manager
-2. **Toolchain management** - Use rustup to install and manage Rust toolchains
+2. **Toolchain compilation** - rustup downloads and compiles Rust toolchain (10-60+ minutes)
 3. **Component installation** - Add clippy, rustfmt, and other components via rustup
 4. **Cargo tools** - Install additional tools via `cargo install`
+
+**Profiles**:
+
+- `default`: Complete toolchain with documentation, sources, and all components (~2GB)
+- `minimal`: Essential tools only, faster installation (~1GB, 2-3x quicker)
 
 ### 🔧 Environment Setup
 
@@ -269,4 +312,4 @@ echo $PATH | grep cargo
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/rust/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/zyrakq/arch-devcontainer-features/blob/main/src/rust-bin/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

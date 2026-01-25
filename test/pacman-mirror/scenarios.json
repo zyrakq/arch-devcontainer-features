@@ -1,0 +1,38 @@
+{
+    "test_builtin": {
+        "image": "archlinux:latest",
+        "features": {
+            "pacman-mirror": {}
+        }
+    },
+    "test_url_mode": {
+        "image": "archlinux:latest",
+        "features": {
+            "pacman-mirror": {
+                "mode": "url",
+                "mirrorlistUrl": "https://archlinux.org/mirrorlist/all/"
+            }
+        }
+    },
+    "test_reflector_mode": {
+        "image": "archlinux:latest",
+        "features": {
+            "pacman-mirror": {
+                "mode": "reflector",
+                "country": "DE,FR",
+                "protocol": "https",
+                "mirrorCount": "5"
+            }
+        }
+    },
+    "test_official_mode": {
+        "image": "archlinux:latest",
+        "features": {
+            "pacman-mirror": {
+                "mode": "official",
+                "country": "DE,AT",
+                "protocol": "https"
+            }
+        }
+    }
+}

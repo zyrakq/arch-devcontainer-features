@@ -1,0 +1,49 @@
+{
+    "id": "pacman-mirror",
+    "version": "1.0.0",
+    "name": "Pacman Mirror Configuration",
+    "description": "Configures pacman mirrorlist for faster package downloads on Arch Linux and Arch Linux ARM",
+    "options": {
+        "mode": {
+            "type": "string",
+            "enum": [
+                "builtin",
+                "url",
+                "reflector",
+                "official"
+            ],
+            "default": "builtin",
+            "description": "Mirrorlist source mode: builtin (embedded lists), url (custom URL), reflector (auto-select), official (archlinux.org API)"
+        },
+        "mirrorlistUrl": {
+            "type": "string",
+            "default": "",
+            "description": "Custom URL to download mirrorlist from (used when mode=url or as fallback for mode=reflector)"
+        },
+        "country": {
+            "type": "string",
+            "default": "",
+            "description": "Comma-separated country codes for mirror filtering (e.g., 'DE,FR,US') - for reflector/official modes"
+        },
+        "protocol": {
+            "type": "string",
+            "enum": [
+                "",
+                "http",
+                "https"
+            ],
+            "default": "https",
+            "description": "Protocol filter for mirrors - for reflector/official modes"
+        },
+        "mirrorCount": {
+            "type": "string",
+            "default": "10",
+            "description": "Number of fastest mirrors to include - for reflector mode"
+        },
+        "uncommentServers": {
+            "type": "boolean",
+            "default": true,
+            "description": "Uncomment #Server lines after downloading mirrorlist (for url and official modes)"
+        }
+    }
+}

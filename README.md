@@ -4,6 +4,20 @@ A collection of DevContainer features for Arch Linux, providing stable and relia
 
 ## 🚀 Available Features
 
+### 🔧 [Pacman Mirror Configuration](src/pacman-mirror/README.md)
+
+Configures pacman mirrorlist for faster package downloads on Arch Linux and Arch Linux ARM with multiple mirror sources.
+
+```json
+{
+    "features": {
+        "ghcr.io/zyrakq/arch-devcontainer-features/pacman-mirror:1": {
+            "mode": "builtin"
+        }
+    }
+}
+```
+
 ### 📦 [Yay AUR Helper](src/yay/README.md)
 
 Installs yay - a popular AUR helper for easy installation of packages from the Arch User Repository.
@@ -350,6 +364,7 @@ The project includes automated processes:
 
 Features are automatically published to:
 
+- `ghcr.io/zyrakq/arch-devcontainer-features/pacman-mirror`
 - `ghcr.io/zyrakq/arch-devcontainer-features/yay`
 - `ghcr.io/zyrakq/arch-devcontainer-features/chaotic-aur`
 - `ghcr.io/zyrakq/arch-devcontainer-features/clone-repo`
@@ -362,6 +377,7 @@ Features are automatically published to:
 
 ## 📖 Documentation
 
+- [Pacman Mirror Configuration](src/pacman-mirror/README.md) - Pacman mirrorlist configuration
 - [Yay AUR Helper](src/yay/README.md) - Detailed yay feature documentation
 - [Chaotic-AUR Repository](src/chaotic-aur/README.md) - Chaotic-AUR feature documentation
 - [Clone Repository](src/clone-repo/README.md) - Clone-repo feature documentation
